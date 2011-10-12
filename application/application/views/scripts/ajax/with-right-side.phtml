@@ -1,0 +1,23 @@
+
+<?php if ($this->row): ?>
+    <div id="site_top">
+        <div class="text_site_top"><?php echo $this->row['item']['name']; ?></div>
+    </div>
+    <div id="site_left_content">
+        <!--
+        <object style="margin-top:20px;" data="swf/asports.swf" width="500" height="80" type="application/x-shockwave-flash">
+            <param name="movie" value="swf/baner.swf" />
+            <param name="quality" value="high" />
+        </object>
+        -->
+    <?php echo $this->row['item']['desc']; ?>
+</div>
+<?php if ($this->right): ?>
+        <div id="site_right_content">
+            <img src="/img/1_26.png" />
+
+        </div>
+<?php endif; ?>
+<?php else: ?>
+            <center><strong>Brak elementów</strong></center>
+<?php endif; ?>

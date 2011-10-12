@@ -1,0 +1,36 @@
+<?php if(count($this->data)): ?>
+<div id="leftScrollDiv">
+    <div id="topofcategories">
+        <h2 class="corners">czołówki działów</h2>
+        <div id="go_top" class="prev"></div>
+        <!-- root element for the scrollable elements -->
+        <div class="scrollable vertical">
+
+<?php 
+$category = array('News', 'Polityka', 'Biznes', 'Sport', 'Kultura', 'Technika', 'Publicystyka', 'Zdrowie'); 
+
+?>
+            
+            <!-- root element for the items -->
+            <div class="items">
+                <?php foreach($this->data as $items): ?>
+                    <div>
+
+                            <div class="item">
+                                <h4><?php echo ucfirst($this->category[$items['item']['row']['category_id']]['name']); ?></h4>
+                                <p><?php echo $items['item']['row']['short_desc']; ?></p>
+
+                                <span class="user">DonPedro</span><span class="more"><a href="<?php echo $this->baseUrl('/'). $this->category[$items['item']['row']['category_id']]['name_url'].'/'.$items['item']['row']['name_url']?>">czytaj więcej >></a></span>
+                            </div>
+                    </div>
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+
+
+        <div id="go_bottom" class="next"></div>
+    </div>
+</div>
+<?php endif; ?>

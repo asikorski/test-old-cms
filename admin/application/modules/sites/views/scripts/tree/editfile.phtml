@@ -1,0 +1,127 @@
+<?php
+$row = $this->row;
+?>
+
+<div id="edit-file-content" style="padding:10px;background:#fafafa;">
+
+
+    <form id ="form-send-<?= $row['id']; ?>"method="post">
+        <table class="dv-table" style="width:100%;padding:5px;margin-top:5px;">
+            <tbody><tr>
+                    <td>Nazwa</td>
+                    <td>
+                        <?=
+                        $this->formText('name',
+                                $row['name'],
+                                array('class' => 'easyui-validatebox',
+                                    'required' => 'true'));
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Krótki opis</td>
+
+                    <td>
+                        <?=
+                        $this->formText('short_desc',
+                                $row['short_desc'],
+                                array('class' => 'easyui-validatebox',
+                                    'required' => 'false'));
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Rozmiar pliku</td>
+                    <td><?= $this->FormatFileSize($row['size']); ?></td>
+                </tr>
+                <tr>
+                    <td>Rzeczywista nazwa:</td>
+                    <td><?= $row['filename']; ?></td>
+                </tr>
+                <tr>
+                    <td>Typ pliku</td>
+                    <td><?= $row['typ']; ?></td>
+                </tr>
+
+                <tr>
+                    <td>Data dodania:</td>
+                    <td>
+                        <?php if ($row['date_add']): ?>
+                        <?= date('d-m-Y', strtotime($row['date_add'])); ?> <strong>o godzinie:</strong> <?= date('h:m:s', strtotime($row['date_add'])); ?>
+                        <?php else: ?>
+                                brak danych
+                        <?php endif; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Data modyfikacji:</td>
+                            <td>
+                        <?php if ($row['date_add']): ?>
+                        <?= date('d-m-Y', strtotime($row['date_mod'])); ?> <strong>o godzinie:</strong> <?= date('h:m:s', strtotime($row['date_mod'])); ?>
+                        <?php else: ?>
+                                        brak danych
+                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pobierz plik:</td>
+                                    <td>
+                        <?php
+                                        $url = $this->FileToDownload($row['filename'], 'sites', 'pl');
+                                        echo $this->atag($url, $url,
+                                                array('title' => 'Pobierz plik'));
+                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Widoczność:</td>
+                                    <td>
+<?=
+                                        $this->formCheckbox('active', (((int) $row['active']) ? 'checked' : null), array(
+                                            'checked' => '1',
+                                            'unChecked' => '0'
+                                        ));
+?>
+                                    </td>
+                                </tr>
+
+                               <!-- <tr>
+
+                                    <td>Akcja:</td>
+                                    <td>
+                                        <a href="#" class="easyui-linkbutton button-blue"  onClick ="deteteItem();" plain="true" onclick="">Usuń</a>
+                                        <a href="#" class="easyui-linkbutton button-blue" plain="true" onclick="">Pobierz</a>
+                                    </td>
+                                </tr>
+                               -->
+                            </tbody></table>
+                        <div style="padding:5px 0;text-align:right;">
+                            <a href="#" class="easyui-linkbutton button-blue"  plain="true" onclick="$('#form-send-<?= $row['id']; ?>').submit(); ">Zapisz</a>
+                            <a href="#" class="easyui-linkbutton button-blue"  plain="true" onclick="">Zamknij</a>
+
+                        </div>
+
+                    </form>
+                    <script type="text/javascript">
+                        $().ready(function() {
+
+                            $('#form-send-<?= $row['id']; ?>').form({
+                                url:'/pl/sites/ajax/setrelation?id=<?= $row['id']; ?>',
+                                onSubmit: function(){
+                                    // do some check
+                                    // return false to prevent submit;
+                                },
+                                success:function(data){
+                                    // alert(data)
+                                    $('#list-files').datagrid('reload');
+                                    $.messager.alert('Uwaga','Dane zostały zapisane');
+                                }
+                            });
+
+
+                        
+             
+        });
+    </script>
+
+</div>

@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#console-box-container').window();
+    });
+</script>
+<div id ="console-box-container"
+     shadow ="false"
+     class="easyui-dialog"
+     draggable ="true"
+     resizable="true"
+     closable ="true"
+     title ="Konsola systemowa" >
+    <div>
+        <p>
+            <?php
+            echo $this->formTextarea('console-output',
+                    'console',
+                    array('id' => 'console-output',
+                        'class' => 'console-textarea'));
+            ?>
+        </p>
+        <p>
+            <?php
+            echo $this->formText('console-input',
+                    'input',
+                    array('class' => 'console-input'));
+            ?>
+        </p>
+    </div>
+
+</div>

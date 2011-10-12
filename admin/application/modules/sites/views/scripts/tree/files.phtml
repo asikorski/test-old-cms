@@ -1,0 +1,113 @@
+<?php
+$row = $this->row;
+?>
+<div id="tree-files-dialog" class="easyui-dialog" style="width:1100px;"
+     closed="false" title ="<?php echo ($row['name']) ? 'Pliki powiązane z: ' . $row['name'] : 'Pliki powiązane'; ?>" style ="width:600px;height:700px;" buttons ="#dlg-buttons-tree-files" >
+    <div id="ttf" class="easyui-tabs" style="height:350px;">
+        <div title="Wyślij nowe pliki" style ="padding:10px;" >
+        <center><a href="#"  id ="fileUpload"  >fgf</a></center>
+        </div>
+        <div title="Lista plików" >
+            <table id="list-files" title="Lista powiązanych plików" class="easyui-datagrid">
+            </table>
+            <!--
+            <table id="list-files" title="Lista powiązanych plików" class="easyui-datagrid"
+                   url="/pl/sites/ajax/getrelations?id=<?php echo $row['id'] ?>"
+                   rownumbers="true" fitColumns="true" singleSelect="true" >
+                <thead>
+                    <tr>
+                        <th field="thumb" width="30">Miniatura</th>
+                        <th field="filename" width="30">Nazwa rzeczywista</th>
+                        <th field="name" width="50">Nazwa wyświetlana</th>
+                        <th field="email" width="50">Opis</th>
+                    </tr>
+                </thead>
+            </table>
+            -->
+
+        </div>
+
+
+
+    </div>
+    <div id="dlg-buttons-tree-files">
+        <a href="#" class="easyui-linkbutton button-blue" title ="Prześlij" onClick ="window.location.href='/pl/sites/tree/edit?id=<?php echo $row['id']; ?>&category_id=<?php echo $row['category_id']; ?>'" ><strong>Gotowe</strong></a>
+        <a href="#" class="easyui-linkbutton button-blue" onclick ="$('#fileUpload').fileUploadStart();" title ="Zamknij okno logowania" >Upload</a>
+
+    </div>
+</div>
+<script type="text/javascript">
+    //    $(document).ready(function() {
+    //
+    //        $('#list-files').datagrid({
+    //            url:'/pl/sites/ajax/getrelations?id=2',
+    //            columns:[[
+    //                    {field:'filename',title:'Code',width:100},
+    //                    {field:'name',title:'Name',width:100},
+    //                    {field:'price',title:'Price',width:100,align:'right'}
+    //                ]]
+    //        });
+    //    });
+    $(document).ready(function() {
+                 $('#list-files').datagrid({
+                    url:'/pl/sites/ajax/getrelations?id=<?php echo $row['id'] ?>',
+                    view: detailview,
+                    height:500,
+                    onLoadSuccess:function(data){
+
+                        },
+                        detailFormatter:function(index,row){
+                            return '<div class="ddv"></div>';
+                        },
+                columns:[[
+
+                        {field:'thumb',title:'Miniatura',width:100,align:'center'},
+                        {field:'name',title:'Tytuł',width:300},
+                        {field:'short_desc',title:'Opis',width:250,align:'center'},
+                        {field:'size',title:'Rozmiar',width:250,align:'center'}
+                    ]],
+                onExpandRow: function(index,row){
+
+                    var ddv = $(this).datagrid('getRowDetail',index).find('div.ddv');
+                    ddv.panel({
+                        border:false,
+                        cache:true,
+                        href:'/pl/sites/tree/editfile?id='+row.id,
+                        onLoad:function(){
+                            $('#dg').datagrid('fixDetailRowHeight',index);
+                            $('#dg').datagrid('selectRow',index);
+                            $('#dg').datagrid('getRowDetail',index).find('form').form('load',row);
+
+                        }
+                    });
+                    $('#dg').datagrid('fixDetailRowHeight',index);
+                    //$('#tree-items').datagrid('collapseAll');
+                }
+            });
+
+
+
+        
+        /*files*/
+        $("#fileUpload").fileUpload({
+            'uploader': '/flash/uploader.swf',
+            'cancelImg': '/img/elements/cancel.png',
+            'script': '<?php echo $this->options['http']['admin']; ?>',
+            'displayData': 'speed',
+            'scriptData': {'action':'upload',
+                'modules':'sites',
+                'lang':'pl',
+                'id':'<?php echo $row['id'] ?>'},
+            'multi': true,
+            'auto': false,
+            'buttonText':'Wybierz',
+            'displayData': 'percentage',
+            onComplete: function (evt, queueID, fileObj, response, data) {
+  
+            },
+            onError     : function (event,ID,fileObj,errorObj) {
+                //alert(errorObj.type + ' Error: ' + errorObj.info);
+            }
+        });
+    });
+</script>

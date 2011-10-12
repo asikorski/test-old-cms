@@ -1,0 +1,29 @@
+<?php
+$row = $this->row;
+?>
+
+<ul class ="easyui-links-list" style="height:18px;margin:0px auto;padding: 0;width: 60px;">
+    <?php if($row['addable']):?>
+    <li style= "float:left;margin-right:2px;">
+        <a title ="Dodaj nowy folder" onClick="addNewNode(<?= $row['id']; ?>)" href="#" class ="sprite-folder_add" style ="display:block;"></a>
+    </li>
+    <?php endif;?>
+    <?php if($row['removable']):?>
+    <li style= "float:left;margin-right:2px;" >
+        <a title ="Usuń folder" onClick="removeNode(<?= $row['id']; ?>)" class ="sprite-folder_delete" style ="display:block;" href="#"></a>
+    </li>
+    <?php endif;?>
+    <?php if($row['editable']):?>
+    <li style= "float:left;margin-right:2px;" >
+        <a title ="Edytuj element" class ="sprite-page_edit" style ="display:block;"href="#"></a>
+    </li>
+    <?php endif;?>
+</ul>
+<?php
+/**
+ * Pliki powiazane - naraize niewidoczne
+ * <li style= "float:left;margin-right:2px;" >
+        <a title ="Zobacz pliki powiązane" class ="sprite-folder" style ="display:block;" href="#"></a>
+    </li>
+ */
+?>

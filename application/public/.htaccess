@@ -1,0 +1,20 @@
+Options +FollowSymLinks
+
+#SetEnvIf Host (.*) my-host=$1
+SetEnvIfNoCase Host "gazeta.millenium2.nazwa.pl" APPLICATION_ENV=production
+SetEnvIfNoCase Host "gazeta.localhost" APPLICATION_ENV=development
+SetEnvIfNoCase Host "beta.gazeta.localhost" APPLICATION_ENV=testing
+    #set global application config
+
+RewriteEngine on
+RewriteRule ^gfx/(.*) thumb.php?query=$1 [L]
+RewriteRule ^download/(.*) getfile.php?query=$1 [L]
+    #gfx download files 
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+#php_flag session.auto_start off

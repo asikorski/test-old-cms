@@ -1,0 +1,195 @@
+
+<div id="categories-tree-edit-dialog" class="easyui-dialog" style="width:600px;height:450px"
+     closed="false" title ="Edytuj drzewo kategorii"  buttons ="#dlg-buttons-tree-edit" >
+    <div class ="easyui-toolbar">
+        <a href="#" class="easyui-linkbutton button-blue" onClick ="addNewNode();" title ="Dodaj nowy element"  >Dodaj</a>
+        <a href="#" class="easyui-linkbutton button-blue" onClick ="removeNode()" title ="Usuń zaznaczone elementy"  >Usuń</a>
+    </div>
+
+    <div class ="edit-tree-container">
+        <ul id="tree-edit"   checkbox="true" ></ul>
+    </div>
+
+
+    <div id="dlg-buttons-tree-edit">
+        <div style ="float:left;">
+            <input id="ss" ></input>
+            <div id="mm" style="width:120px">
+                <div name="all" iconCls="icon-ok">All News</div>
+                <div name="sports">Sports News</div>
+            </div>
+        </div>
+        <a href="#" class="easyui-linkbutton button-blue"  title ="Zapisz zmiany"  ><strong>Zamknij</strong></a>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#ss').searchbox({
+        width:200,
+        searcher:function(value,name){
+            alert(value + "," + name)
+        },
+        menu:'#mm',
+        prompt:'Please Input Value'
+    });
+    //       $('#tree-edit').treegrid({
+    //        rownumbers: true,
+    //        animate:true,
+    //        collapsible:true,
+    //        fitColumns:true,
+    //        url:'/pl/sites/ajax/getcategories',
+    //        idField:'id',
+    //        treeField:'name',
+    //        showFooter:true,
+    //        rowStyler:function(row){
+    //            if (row.persons > 1){
+    //                return 'background:#AAD684;color:#fff';
+    //            }
+    //        },
+    //        columns:[[
+    //                {title:'Foldery stron',field:'name',width:180,
+    //                    formatter:function(value){
+    //
+    //                        return value;
+    //                    }
+    //                }
+    //
+    //            ]]
+    //
+    //        });
+    $('#tree-edit').tree({
+        dnd: true,
+        url: '<?php echo $this->URL(array('controller'=>'ajax','module'=>'sites','action'=>'getcategories'));?>',
+        onlyLeafCheck:false,
+        cascadeCheck:false,
+        onDrop: function(targetNode, source, point){
+            var target = $('#tree-edit').tree('getNode', targetNode);
+            var sourceid = source.attributes.id;
+            $.messager.confirm('Uwaga!','Czy chcesz przenieść "'+source.text+'" do "' + target.text + '"',function(r){
+                if (r){
+                    $.ajax({
+                        url: '<?php echo $this->URL(array('controller'=>'ajax','module'=>'sites','action'=>'moveroot'));?>',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            root: sourceid,
+                            target: target.attributes.id
+                        },
+                        success: function(data){
+
+
+                            if(data.success){
+                                $.messager.alert('Uwaga','Element został przeniesiony');
+                            }else{
+                                $('#tree-edit').tree('reload', 0);
+                                $.messager.alert('Uwaga','Problem podczas przenoszenia elementu');
+                            }
+                        }
+                    });
+                    
+                }
+            });
+            //alert(source.text);
+            //       $.ajax({
+            //           url: '...',
+            //           type: 'post',
+            //           dataType: 'json',
+            //           data: {
+            //               id: source.id,
+            //               targetId: targetId,
+            //               point: point
+            //           }
+            //       });
+        } ,
+        onLoadSuccess: function(node, data){
+            //alert('test');
+        }
+    });
+    function removeNode(){
+        var selectedId = $('#tree-edit').tree('getChecked');
+        if(selectedId!=null){
+            var  elements = new Array(selectedId.length);
+            var arr = new Array(selectedId.length);
+            for (var i=0;i<selectedId.length;i++){
+                if(selectedId[i].text){
+                    elements = selectedId[i].text + ', ';
+                    arr[i]=selectedId[i].attributes.id;
+                }
+                
+            }
+            $.messager.confirm('Uwaga!','Czy napewno chcesz usunąć elementy: </br>'+elements+'?',function(r){
+                if (r){
+                    $.ajax({
+                        url: '<?php echo $this->URL(array('controller'=>'ajax','module'=>'sites','action'=>'removeroot'));?>',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            roots: arr
+
+                        },
+                        success: function(data){
+                            if(data.success){
+                                $('#tree-edit').tree('reload', 0);
+                                $.messager.alert('Uwaga','Element został usunięty');
+                            }else{
+                                $.messager.alert('Uwaga','Problem podczas dodawania elementu');
+                            }
+                        }
+                    });  
+                }
+            });
+        }else{
+            $.messager.alert('Uwaga','Nie zaznaczyłeś zadnego elementu do usuniecia');
+        }
+
+    }
+    function addNewNode(){
+        var selectedId = $('#tree-edit').tree('getChecked');
+
+        if(selectedId.length==1){
+            if(selectedId[0].attributes.id==9999){
+                $.messager.alert('Uwaga','Do tej kategorii nie mozesz dodać zadnego elementu');
+            }else{
+                $.messager.confirm('Uwaga!','Czy napewno chcesz dodać nowy element do: ' + selectedId[0].text,function(r){
+                    if (r){
+                        /**
+                         * Dodawanie nowege korzenia
+                         */
+                        $.messager.prompt('Nazwa elementu', 'Podaj nazwe dodawanego elementu', function(r){
+                            if (r){
+
+                                var itemName = r;
+                            }else{
+                                var itemName = 'Nowy element';
+                            }
+                            $.ajax({
+                                url: '<?php echo $this->URL(array('controller'=>'ajax','module'=>'sites','action'=>'addnewnodetoroot'));?>',
+                                type: 'post',
+                                dataType: 'json',
+                                data: {
+                                    root: selectedId[0].attributes.id,
+                                    name: itemName
+
+                                },
+                                success: function(data){
+                                    if(data.success){
+                                        $('#tree-edit').tree('reload', 0);
+                                        $.messager.alert('Uwaga','Element został dodany');
+
+                                    }else{
+                                        $.messager.alert('Uwaga','Problem podczas dodawania elementu');
+                                    }
+                                }
+                            });
+                        });
+                    
+                    }else{
+                        $.messager.alert('Uwaga','Anulowano dodawanie nowego elementu');
+                    }
+                });
+            }
+        }else{
+            $.messager.alert('Uwaga','Nie wybrałeś lub wybrałeś wiecej jak jeden folder do którego chcesz dodać');
+        }
+
+    }
+</script>

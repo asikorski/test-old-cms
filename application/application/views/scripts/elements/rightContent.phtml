@@ -1,0 +1,94 @@
+<div id="left_top">
+    <h2 class="corners h2top h2topleft">top autorzy</h2>
+    <h2 class="corners h2top h2notactive">top teksty</h2>
+    <div class="autor">
+        <div class="autor_img"></div>
+        <div class="autor_info">
+            <span class="autor_title">Autor miesiąca</span>
+            <span class="autor_name info">DonPedro</span>
+            <span class="autor_pkt info">+235pkt</span>
+        </div>
+        <div class="autor_vi"><img src="img/1_60.png" /></div>
+    </div>
+
+    <div class="autor">
+        <div class="autor_img"></div>
+        <div class="autor_info">
+            <span class="autor_title">Autor tygodnia</span>
+            <span class="autor_name info">DonPedro</span>
+            <span class="autor_pkt info">+235pkt</span>
+        </div>
+        <div class="autor_vi"><img src="img/1_68.png" /></div>
+    </div>
+
+    <div class="autor">
+        <div class="autor_img"></div>
+        <div class="autor_info">
+            <span class="autor_title">Autor dnia</span>
+            <span class="autor_name info">DonPedro</span>
+            <span class="autor_pkt info">+235pkt</span>
+        </div>
+        <div class="autor_vi"><img src="img/1_74.png" /></div>
+    </div>
+    <div id="ads250">reklama</div>
+</div>
+
+
+<div id="leftScrollDiv">
+    <div id="topofcategories">
+        <h2 class="corners">czołówki działów</h2>
+        <div id="go_top" class="prev"></div>
+        <!-- root element for the scrollable elements -->
+        <div class="scrollable vertical">
+
+<?php 
+$category = array('News', 'Polityka', 'Biznes', 'Sport', 'Kultura', 'Technika', 'Publicystyka', 'Zdrowie'); 
+
+?>
+            
+            <!-- root element for the items -->
+            <div class="items">
+                <?php foreach($category as $items): ?>
+                    <div>
+
+                            <div class="item">
+                                <h4><?php echo $items ?></h4>
+                                <p>Przykładowy tekst jakiegokolwiek artukułu na okolo 60 znaków</p>
+
+                                <span class="user">DonPedro</span><span class="more"><a href="#more">czytaj więcej >></a></span>
+                            </div>
+                    </div>
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+
+
+        <div id="go_bottom" class="next"></div>
+    </div>
+</div>
+
+<style>
+
+    /* root element for scrollable */
+    .scrollable {
+
+        /* required settings */
+        position:relative;
+        overflow:hidden;
+
+        /* vertical scrollables have typically larger height than width but not now */
+        height: 265px;
+        width: 250px;
+    }
+
+    /* root element for scrollable items */
+    .scrollable .items {
+        position:absolute;
+        width: 250px;
+        /* this time we have very large space for the height */
+        height:20000em;
+    }
+
+</style>

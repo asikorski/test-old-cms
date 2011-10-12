@@ -1,0 +1,35 @@
+
+<?php echo 'losowy ciag:'.$this->id;   ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#widget_facebook_<?php echo $this->id ?>').click(function() {
+            $('#widget_facebook-box_<?php echo $this->id ?>').toggle();
+        });
+    });
+</script>
+<!--prosty widget-->
+<style type="text/css">
+    #widget_facebook_<?php echo $this->id ?>{
+      width: 48px;
+    height: 48px;
+    position: fixed;
+    z-index: 10;
+    bottom: 31px;
+    left: 161px;
+    cursor: pointer;
+    background: url("/img/elements/facebook.png") repeat-x center center ;
+}
+#widget_facebook-box_<?php echo $this->id ?>{
+    display: none;
+    width: 292px;
+    height: 300px;
+    position: fixed;
+    z-index: 10;
+    bottom: 20px;
+    right: 20px;
+}
+</style>
+<div title ="Znajdź nas na facebooku" id ="widget_facebook_<?php echo $this->id ?>"></div>
+<div  id ="widget_facebook-box_<?php echo $this->id ?>" class ="ui-shadow-all">
+    <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FMillenium-Studio%2F194795513872677&amp;width=292&amp;colorscheme=light&amp;show_faces=true&amp;stream=false&amp;header=true&amp;height=300" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:300px; background-color: white;" allowTransparency="false"></iframe>
+</div>

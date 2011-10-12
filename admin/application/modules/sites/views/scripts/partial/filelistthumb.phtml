@@ -1,0 +1,31 @@
+<ul style ="margin:0;padding: 0;">
+<?php
+
+$files = $this->files;
+
+foreach ($files as $file):
+    $fileType = $this->FileType($file['filename']);
+    if ($fileType[0] == 'image') {
+
+        $imageURL = $this->ImgToUrl($file['filename'],
+                        'sites',
+                        'pl',
+                        array('image_ratio_crop' => 'top',
+                            'image_resize' => true,
+                            'image_x' => 48,
+                            'image_y' => 48,));
+    } else {
+        //echo "inne";
+        $imageURL = $this->ImgToUrl($this->FileIcon($fileType[0]),
+                        null,
+                        null,
+                        array('image_resize' => false,
+                            'set_image_public_path' => '/img/icons/files'));
+    }
+?>
+<li style="float:left;margin-left: 2px;margin-right: 2px;">
+<?= $this->img($imageURL, true,
+        array('alt' => 'thumb','title'=>$file['name'])); ?>
+</li>
+<?php endforeach;?>
+</ul>

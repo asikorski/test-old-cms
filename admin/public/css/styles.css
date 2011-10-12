@@ -1,0 +1,163 @@
+/*
+    @Author: Arnold Sikorski
+
+    Podstawowy arkusz styli
+*/
+/*tło dla całosci*/
+body{
+    font: 12px/15px Arial,Helvetica,sans-serif !important;
+    color: #464339 !important;
+    /* text-shadow: 0 1px 0 #FFFFFF, 0 0 10px rgba(255, 255, 255, 0.6) !important;*/
+    margin: 0;
+    background: url("/img/background/gradient.jpg") repeat-x top left #25174b;
+    padding: 0;
+}
+#background-image-replace-x{
+    background: url("/img/background/background-1.jpg") no-repeat top center #25174b;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 839px;
+}
+
+/*inputy*/
+input, textarea{
+
+}
+
+form#auth_form input{
+    color: #463C8C;
+    width: 200px;
+}
+form#auth_form label{
+}
+form#auth_form dl, dt, dd {
+    display: block;
+    margin: 0;
+    padding:0;}
+form#auth_form dl, dt, dd  label{
+    color:#817698;
+    margin-top: 4px;
+    margin-bottom: 2px;
+    text-shadow: 1px 1px 0 white;
+}
+/*menu top*/
+/*menu*/
+#modules-list-top{
+    width:100%;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 10;
+    /*background: url("/img/elements/gradient-header.png") repeat-x scroll center  transparent;*/
+
+}
+#modules-list-top a.menu-main-top{
+    font-size: 11px;
+    text-decoration: none;
+    color: #464339;
+    border: 0 none;
+    text-shadow: 1px 1px 0 white;
+    text-align: center;
+    display: block;
+    min-width: 32px;
+    height: 10px;
+    float:left;
+    margin-right: 8px;
+    padding-top: 32px;
+
+}
+#modules-list-top a.menu-main-top span{
+    padding: 0 !important;
+    background: none !important;
+    display: block !important;
+    text-align: center !important;
+
+}
+#modules-list-top a.menu-main-top:hover{
+    border: 0 none;
+}
+#modules-list-top #menu-main-top-plugins{
+    background: url("/img/icons/plugins.png") no-repeat scroll top center  transparent;
+}
+#modules-list-top #menu-main-top-options{
+    background: url("/img/icons/settings.png") no-repeat scroll top center  transparent;
+}
+#modules-list-top #menu-main-top-acount{
+    background: url("/img/icons/users.png") no-repeat scroll top center  transparent;
+}
+#modules-list-top #menu-main-top-unicorncms{
+    background: url("/img/icons/globe.png") no-repeat scroll top center  transparent;
+}
+.fileUploadQueue{
+    max-height: 150px;
+    overflow: auto;
+    margin-top: 10px;
+    padding: 6px;
+    background: #f0f0f0 !important; /* Old browsers */
+    background: -moz-linear-gradient(top, #f0f0f0 0%, #e2e2e2 100%) !important; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f0f0), color-stop(100%,#e2e2e2)) !important; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f0f0f0 0%,#e2e2e2 100%) !important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f0f0f0 0%,#e2e2e2 100%) !important; /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #f0f0f0 0%,#e2e2e2 100%) !important; /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#e2e2e2',GradientType=0 ) !important; /* IE6-9 */
+    background: linear-gradient(top, #f0f0f0 0%,#e2e2e2 100%) !important; /* W3C */
+    /*gradient*/
+    -moz-border-radius:46px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    border: 1px solid #CFCFCF;
+}
+.fileUploadQueue .fileUploadQueueItem{
+    clear: both;
+
+}
+.fileUploadQueue .fileUploadQueueItem .cancel{
+    width: 16px;
+    height: 16px;
+    float: right;
+}
+.fileUploadQueue .fileUploadQueueItem span, .fileUploadQueue .fileUploadQueueItem a{
+    height: 24px;
+}
+/*Menu top modułów Author: Arnold Sikorski*/
+#topmenu { background: url("/img/cms/pasek1.png") repeat-x scroll 0 0 transparent;height: 69px;padding: 5px;}
+#topmenu #topmenu-left {float: left;}
+#topmenu  #topmenu-right {float: right;}
+#topmenu ol, ul {list-style: none outside none;}
+#topmenu ul {padding: 0 !important;margin: 0 !important;}
+#topmenu li {float: left;}
+#topmenu a {margin-top: 1px;}
+#topmenu a img:hover {background: url("/img/cms/podswietlenie.png") no-repeat scroll 0 -4px transparent;}
+#topmenu  .li-line {background: url("/img/cms/kreska.png") no-repeat scroll 0 0 transparent;height: 35px;margin-top: 5px;width: 2px;}
+#topmenu .submenu li {background: url("/img/cms/aaa.png") no-repeat scroll 0 0 transparent;float: none;height: 24px;list-style: none outside none;width: 136px;}
+#topmenu .submenu a {color: white;display: block;height: 25px;line-height: 23px;padding-left: 21px;}
+/*iframe*/
+.iframe-no-border{border:0px none;margin: 0px !important;padding: 0px !important;}
+
+a.button-margin{
+    margin-left:2px;
+    margin-right:2px;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+/**/
+.row-detail-body{
+    color:#606060 !important;
+}
+.row-detail-body .panel-header{
+
+background: rgb(235,235,235); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(235,235,235,1) 0%, rgba(204,204,204,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(235,235,235,1)), color-stop(100%,rgba(204,204,204,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(235,235,235,1) 0%,rgba(204,204,204,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(235,235,235,1) 0%,rgba(204,204,204,1) 100%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, rgba(235,235,235,1) 0%,rgba(204,204,204,1) 100%); /* IE10+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebebeb', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+background: linear-gradient(top, rgba(235,235,235,1) 0%,rgba(204,204,204,1) 100%); /* W3C */
+border: 0px none !important;
+}
+.row-detail-body .panel-body{
+
+    border-left: 3px solid red;
+}

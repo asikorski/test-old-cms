@@ -1,0 +1,88 @@
+<?php
+/*
+ * Generowanie listy aktualnie zainstalowanych widgetów
+ */
+?>
+
+<div id ="modules-list-top">
+
+    <div id="topmenu">
+        <div id="topmenu-left">
+            <ul>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+                <li class="mainli">
+                    <a href="<?php echo $this->url(array('language' => 'pl', 'module' => 'sites', 'controller' => 'tree', 'action' => 'edit')); ?>">
+                        <img src="/img/cms/ico_04.png" alt="jakis alt" title ="Edytuj strony" />
+                    </a>
+                </li>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+            </ul>
+        </div>
+        <div id="topmenu-right">
+            <ul>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+                <li class="mainli">
+                    <a href="<?php echo $this->url(array('language' => 'pl', 'module' => 'default', 'controller' => 'index', 'action' => 'about')); ?>">
+                        <img src="/img/cms/icons2png_45.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+                <li class="mainli">
+                    <a href="<?php echo $this->url(array('language' => 'pl', 'module' => 'default', 'controller' => 'index', 'action' => 'contact')); ?>">
+                        <img src="/img/cms/icons2png_48.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+                <li class="mainli">
+                    <a href="<?php echo $this->url(array('language' => 'pl', 'module' => 'auth', 'controller' => 'index', 'action' => 'password')); ?>">
+                        <img src="/img/cms/ico_11.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+                <li class="mainli">
+                    <a href="/admin/ustawienia.php">
+                        <img src="/img/cms/ico_10.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+                <li class="mainli">
+                    <a href="<?php echo $this->url(array('language' => 'pl', 'module' => 'default', 'controller' => 'index', 'action' => 'preview')); ?>">
+                        <img src="/img/cms/ico_13.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+                <li class="mainli">
+                    <a href="<?php echo $this->url(array('language' => 'pl', 'module' => 'auth', 'controller' => 'index', 'action' => 'logout')); ?>">
+                        <img src="/img/cms/ico_14.png" alt ="Wyloguj mnie">
+                    </a>
+                </li>
+                <li>
+                    <div class="li-line"></div>
+                </li>
+            </ul>
+        </div>
+        <div>
+
+            <div id="footer">
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,154 @@
+<?php
+/**
+ * @author Arnold Sikorski
+ *
+ * Generowanie listy kategorii
+ *
+ */
+$hash = md5(date('Y-m-d'));
+$uploadURL = $this->url(
+                array(
+                    'module' => $this->ModuleName,
+                    'controller' => 'upload',
+                    'action' => 'upload'));
+$removeURL = $this->url(
+                array(
+                    'module' => $this->ModuleName,
+                    'controller' => 'upload',
+                    'action' => 'delate'));
+?>
+<script type="text/javascript">
+    
+    $(document).ready(function() {
+
+        $(function() {
+            $( "#<? echo $this->ModuleName; ?>-box-container" ).dialog({
+                resizable: true,
+                minWidth: 960,
+                position: 'center',
+                closeOnEscape:false,
+                autostart:true,
+                onOpen  : function(event,ID,fileObj) {
+                    //$('#FiledataQueue div.uploadifyQueueItem:first-child').hide();
+                    alert('work');
+                }
+
+            });
+        });
+         
+        /*uploader plików*/
+       $( "button, input:submit, a", ".info-bar" ).button();
+        $("#start-upload ").click(function (event) {
+            //event.preventdefault();
+            $('#fileUpload').fileUploadStart()
+        });
+        $("a").click(function (event) {
+            //event.preventdefault();
+            alert('jestem tu');
+        });
+        //$('#fileUpload').fileUploadClearQueue()
+
+    });
+    function RemoveElement(id) {
+        $(document).ready(function() {
+            $.get(
+            "<?php echo $removeURL; ?>",
+            {
+                "id" : id
+            },
+            function (r) {
+                //alert(r);
+                var liselector = '#file-element-id-'+id;
+                $(liselector).fadeOut('slow', function() {
+                    $(liselector).remove();
+                });
+
+            });
+        });
+        return false;
+    }
+    /**
+     * @Author: Arnold Sikorski
+     */
+    function DownloadFile(filename){
+        //download/default/1306502953_wallpaper-1064493.jpg
+    }
+</script>
+<div  id ="<? echo $this->ModuleName; ?>-box-container" title ="Manager plików">
+    <div class="info-bar">
+        <div class="toolbar-elements clearfix" id="category-edit-toolbar">
+            <button title="Szukaj kategorii" id="files-search" style="float:left;" >Szukaj</button>
+            <button title="Wyczyść wybrane" id="files-search" style="float:right;" >Wyczyść wybrane</button>
+            <button title="Wyślij na serwer" id="files-upload" style="float:right;" >Wyślij pliki</button>
+        </div>
+    </div>
+    <script type ="text/javascript">
+         $("#fileUpload").fileUpload({
+            'uploader': '/flash/uploader.swf',
+            'cancelImg': '/img/elements/cancel.png',
+            'script': '<?php echo $uploadURL; ?>',
+            'displayData': 'speed',
+            'scriptData': {'action':'upload','name':'nazwa pliku'},
+            'multi': true,
+            'auto': false,
+            'displayData': 'percentage',
+            onComplete: function (evt, queueID, fileObj, response, data) {
+                //  alert(response);
+            }
+        });
+
+        </script>
+    <fieldset style="border: 1px solid #CDCDCD; padding: 8px; padding-bottom:0px; margin: 8px 0">
+        <legend><strong>Pliki  powiazane</strong></legend>
+        <div class ="file-upload-container clearfix">
+            <?php
+//var_dump($this->oRelationFiles);
+            ?>
+            <?php if (!empty($this->oRelationFiles)): ?>
+                <ul>
+                <?php foreach ($this->oRelationFiles as $file): ?>
+                <?php $FileArray = $this->FileIcons($file); ?>
+                    <li id ="file-element-id-<?php echo $file['id']; ?>">
+                    <?php
+                    if ($FileArray['type'] == 'image') {
+                        $icon = $this->ImgThumb(
+                                        array(
+                                            'module' => $this->registerModule,
+                                            'width' => 50,
+                                            'height' => 50,
+                                            'file' => $file['filename']));
+                    } else {
+                        $icon = $FileArray['imgurl'];
+                    }
+                    ?>
+                    <a href ="#"onclick ="RemoveElement(<?php echo $file['id']; ?>);" title ="Czy chcesz usunąć plik: <?php echo $FileArray['clearname']; ?>" class ="delate-file-button"></a>
+                    <?php
+                    $downloaduri = $this->url(
+                                    array(
+                                        'module' => 'download',
+                                        'controller' => $this->registerModule,
+                                        'action' => $file['filename'])); //<?php echo $file['filename'];
+                    ?>
+                    <a href ="<?php echo $downloaduri; ?>"  title ="" class ="download-file-button"></a>
+                    <a href ="#"onclick ="alert('pobieram plik')" title ="" class ="preview-file-button"></a>
+                    <div style ="width:100%">
+                        <img alt="Ikona"title ="Pełna nazwa pliku: <?php echo $file['filename']; ?>, Dodany: <?php echo $file['date_add']; ?>, Zmodyfikowany: <?php echo $file['date_mod']; ?>"src ="<?php echo $icon; ?>"/>
+                    </div>
+                    <span><?php echo $FileArray['clearname']; ?></span>
+                </li>
+<?php endforeach; ?>
+            </ul>
+                <?php else: ?>
+                    Brak powiązanych plików
+            <?php endif; ?>
+
+        </div>
+    </fieldset>
+    <div id ="files-uploader">
+        <fieldset style="border: 1px solid #CDCDCD; padding: 8px; padding-bottom:0px; margin: 8px 0">
+            <legend><strong>Wybierz pliki które chcesz wysłać na serwer</strong></legend>
+            <p>Zobacz prędkość</p>
+            <div id="fileUpload">You have a problem with your javascript</div>
+        </fieldset>
+    </div>
+</div>

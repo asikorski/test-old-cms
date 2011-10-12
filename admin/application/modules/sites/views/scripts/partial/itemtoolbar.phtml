@@ -1,0 +1,31 @@
+<?php 
+$row = $this->row;
+$activeClass = ($row['active']) ? 'sprite-accept' : 'sprite-cross';
+?>
+
+<ul class ="easyui-links-list" style="height:18px;margin:0px auto;padding: 0;width: 60px;">
+    <li style= "float:left;margin-right:2px;">
+        <a title ="Widoczność" href="#" class ="<?= $activeClass ?>" style ="display:block;"></a>
+    </li>
+    <li style= "float:left;margin-right:2px;" >
+        <a title ="Usuń element" onClick="deteteItem(<?= $row['id'];?>);" class ="sprite-page_delete" style ="display:block;" href="#"></a>
+    </li>
+    <li style= "float:left;margin-right:2px;" >
+        <a title ="Przejdz do edycji" class ="sprite-page_edit" style ="display:block;" href="
+                            <?= $this->url(array('module' => 'sites',
+                                'controller' => 'tree',
+                                'action' => 'content',
+                                'id' => $row['id'],
+                                'category' => $row['category_id'])); ?>
+                            "></a>
+    </li>
+    
+</ul>
+<?php
+/**
+ * Pliki powiazane - naraize niewidoczne
+ * <li style= "float:left;margin-right:2px;" >
+        <a title ="Zobacz pliki powiązane" class ="sprite-folder" style ="display:block;" href="#"></a>
+    </li>
+ */
+?>

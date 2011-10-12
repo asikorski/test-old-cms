@@ -1,0 +1,38 @@
+<script type ="text/javascript">
+    $(document).ready(function() {
+        //$('#login-box-container').dialog('open').dialog();
+        $('#login-box-container').window();
+<?php if (!$this->ZendAuthResult): ?>
+            $.messager.alert('Problem podczas logowania','Podane hasło [i/lub] login błędne </br> <strong>Próba logowania została zapisana!</strong>','error',function(r){
+
+                    //$('#login-box-container').window('open');
+
+            });
+<?php else: ?>
+                                       // $('#login-box-container').window('open');
+<?php endif; ?>
+
+
+            });
+            function sumbitAuthForm(){
+                var isValid = $('#auth_form').form('validate');
+                if(isValid){
+                    $('#auth_form').submit()
+                }
+
+
+            }
+        </script>
+        <div id ="login-box-container"   shadow ="false" class="easyui-dialog" style="padding:10px 20px" draggable ="false" resizable="false" closable ="false" title ="logowanie" buttons="#dlg-buttons-login" >
+ 
+    <?php echo $this->AuthForm; ?>
+
+    <div id="dlg-buttons-login">
+        <a href="#" class="easyui-linkbutton button-blue" title ="Kliknij by zalogować"  onclick="sumbitAuthForm()"><strong>Zaloguj</strong></a>
+        <a href="#" class="easyui-linkbutton button-blue" title ="Zamknij okno logowania" icon-cancel" onclick="javascript:$('#login-box-container').dialog('close')">Anuluj</a>
+    </div>
+</div>
+
+
+
+

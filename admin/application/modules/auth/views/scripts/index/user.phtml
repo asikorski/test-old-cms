@@ -1,0 +1,15 @@
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#user-box-container').window();
+        });
+    </script>
+       <div id ="user-box-container"   style ="padding:10px;" shadow ="false" class="easyui-dialog"  draggable ="true" resizable="true" closable ="false" title ="edytuj swój profil" buttons="#dlg-buttons-action" >
+<?php echo $this->UserForm; ?>
+    <div id="dlg-buttons-action">
+        <a href="#" class="easyui-linkbutton button-blue" title ="Zapisz zmiany"  onclick="sumbitAuthForm()"><strong>Zapisz zmiany</strong></a>
+        <a href="#" class="easyui-linkbutton button-blue" title ="Zamknij okno" >Anuluj</a>
+
+         <a href="#" class="easyui-linkbutton button-blue" style ="float:left;" title ="Zamknij okno" >Zmień hasło</a>
+         <a href="#" class="easyui-linkbutton button-blue" style ="float:left;" title ="Prawa dostępu" >Prawa dostępu</a>
+    </div>
+</div>

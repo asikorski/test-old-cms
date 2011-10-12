@@ -1,0 +1,35 @@
+<?php
+$row = $this->row;
+?>
+<table>
+    <tbody>
+        <tr>
+            <td><strong>Imię i Nazwisko:</strong></td>
+            <td><?php echo $row['name']; ?></td>
+        </tr>
+        <tr>
+            <td><strong>Email</strong></td>
+            <td><?php echo $row['email']; ?></td>
+        </tr>
+        <tr>
+            <td><strong>Temat:</strong></td>
+            <td><?php echo $row['subject']; ?></td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+<strong><center>Treść maila:</center></strong>
+<p>
+    <?php echo $row['message']; ?>
+</p>
+<hr />
+<strong><center>Log</center></strong>
+<pre>
+    <?php
+    print_r($_SERVER);
+    print_r($_REQUEST);
+    print_r($_SESSION);
+    ?>
+
+
+</pre>

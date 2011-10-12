@@ -1,0 +1,439 @@
+
+<?php
+$row = $this->row;
+
+/* URL zwrotny */
+$urlBack = $this->url(array('module' => 'sites',
+            'controller' => 'tree',
+            'action' => 'edit',
+            'id' => $row['id'],
+            'category' => $row['category_id']));
+/* url zapisu */
+$urlSave = $this->ParmsURL(array('module' => 'sites',
+            'controller' => 'ajax',
+            'action' => 'setitem'),
+                array('id' => $row['id']));
+/* url relacji */
+$urlGetRelations = $this->ParmsURL(array('module' => 'sites',
+            'controller' => 'ajax',
+            'action' => 'getrelations'),
+                array('id' => $row['id']));
+/* url edycji */
+$urlEditFile = $this->url(array('module' => 'sites',
+            'controller' => 'ajax',
+            'action' => 'editfile'), null, true);
+?>
+<div id="tree-edit-dialog"
+     class="easyui-window"
+     closed="false"
+     style="width:1100px;"
+     title ="Edytuje: <?= ($row['name']) ? $row['name'] : 'brak nazwy'; ?> [ ostatnio edytowany <?= $this->TimePassed(strtotime($row['date_add'])); ?> temu ]"
+     buttons ="#dlg-buttons-tree-edit" >
+    <form id="form-desc" method="post">
+        <?php if ($row): ?>
+            <div id="ttf" class="easyui-tabs" >
+
+                <div iconCls="sprite-page_edit" title="Treść" style ="padding:10px;">
+
+
+                    <div style="padding:5px;background:#fafafa;border:1px solid #ccc;margin-bottom:4px;max-height:300px;overflow: auto;">
+
+                        <div id="text-editor-contet-show">
+                            <?php if ($row['desc']): ?>
+                        <?= $row['desc']; ?>
+                            <?php else: ?>
+                            <center>Brak  tekstu - kliknij "edytuj" by wprowadzić tekst</center>
+                            <?php endif; ?>
+                    </div>
+                    <?=
+                        $this->formTextarea('desc',
+                                $row['desc'],
+                                array('id' => 'content-editor',
+                                    'style' => 'width:100%;height:100%;display:none;'));
+                    ?>
+                        </div>
+
+                        <div id ="edit-button-content" style="padding:5px;background:#fafafa;border:1px solid #ccc">
+                            <center>
+                                <a href="#" class="easyui-linkbutton" onClick="showEditContent();" plain="true" iconCls="sprite-page_edit">Edytuj</a>
+                            </center>
+
+                        </div>
+
+
+
+                    </div>
+                    <div iconCls="sprite-layout" title="Elementy" >
+                        <table class="dv-table" style="width:100%;padding:5px;margin-top:5px;">
+                            <tbody>
+                                <tr>
+                                    <td>Nazwa</td>
+                                    <td>
+                                <?php
+                                echo $this->formText('name',
+                                        $row['name'],
+                                        array('class' => 'easyui-validatebox',
+                                            'required' => 'true'));
+                                ?>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Krótki opis</td>
+                            <td>
+                                <?php
+                                echo $this->formText('short_desc',
+                                        $row['short_desc'],
+                                        array('class' => 'easyui-validatebox',
+                                            'required' => 'true'));
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Adres URL</td>
+                            <td>
+                                <?php
+                                echo $this->formText('name_url',
+                                        $row['name_url'],
+                                        array('class' => 'easyui-validatebox',
+                                            'required' => 'true'));
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Aktywność:</td>
+                            <td>
+                                <?=
+                                $this->formCheckbox('active', (((int) $row['active']) ? 'checked' : null), array(
+                                    'checked' => '1',
+                                    'unChecked' => '0'
+                                ));
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Data rozpoczecia: </td>
+                            <td>
+                                <?php
+                                echo $this->formText('date_start',
+                                        $row['date_start'],
+                                        array('class' => 'date-time'));
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Data zakończenia: </td>
+                            <td>
+                                <?php
+                                echo $this->formText('date_stop',
+                                        $row['date_stop'],
+                                        array('class' => 'date-time'));
+                                ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div iconCls="sprite-folder" title="Pliki" fit="true">
+                <!--Pliki-->
+                <div class="easyui-tabs" style="height:300px;">
+                    <div iconCls="sprite-application_view_list" title="Lista plików" >
+                        <table id="list-files" class="easyui-datagrid"></table>
+                    </div>
+                    <div iconCls ="sprite-folder_add" title="Wyślij" style ="padding:10px;" >
+                        <div style="padding:5px;background:#fafafa;border:1px solid #ccc;margin-bottom:4px;max-height:300px;overflow: auto;">
+                            <center><a href="#"  id ="fileUpload"  >fgf</a></center>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--Pliki-->
+            </div>
+            <div iconCls="sprite-page_white_world" title="Metatagi" >
+                <table class="dv-table" style="width:100%;padding:5px;margin-top:5px;">
+                    <tbody>
+                        <tr>
+                            <td>Meta title</td>
+                            <td>
+                                <?php
+                                echo $this->formText('meta_title',
+                                        $row['meta_title'],
+                                        array('class' => 'easyui-validatebox',
+                                            'required' => 'true'));
+                                ?>
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div iconCls ="sprite-chart_bar" title="Statystyki" >
+                <table class="dv-table" style="width:100%;padding:5px;margin-top:5px;">
+                    <tbody>
+                        <tr>
+                            <td>Identyfikator elementu:</td>
+                            <td>
+<?= $row['id']; ?>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Identyfikator kategorii:</td>
+                            <td>
+<?= $row['category_id']; ?>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Całkowity adres URL:</td>
+                            <td>
+<?= $row['name_url']; ?>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Plików powiązanych:</td>
+                            <td>
+                                asad
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Data utworzenia:</td>
+                            <td>
+<?= $row['date_add']; ?>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Data modyfikacji:</td>
+                            <td>
+<?= $row['date_mod']; ?>
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+
+    </form>
+
+    <?php else: ?>
+                                    <strong>Brak elementów do wyświetlenia</strong>
+<?php endif; ?>
+                                    <!--                                    <div id="dlg-buttons-tree-edit">
+                                                                            <a href="#" class="easyui-linkbutton button-blue" onclick ="save(false);" title ="Zapisz zmiany"  ><strong>Zapisz</strong></a>
+                                                                            <a href="#" class="easyui-linkbutton button-blue" onclick ="save(true);" title ="Zapisz zmiany"  ><strong>Zapisz i powróć</strong></a>
+                                                                            <a href="#" style ="float:left;" class="easyui-linkbutton button-blue" onClick =" back();" title ="Wróć do listy stron bez zapisu" >Wróć</a>
+                                                                        </div>-->
+                                    <div style="padding:5px;background:#fafafa;border:1px solid #ccc">
+                                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-back">Powrót</a>
+                                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-cancel">Anuluj</a>
+                                        <a href="#" class="easyui-linkbutton" plain="true" iconCls="icon-reload">Odświerz</a>
+                                        <a href="#" class="easyui-linkbutton" plain="true" onclick ="save(false)" iconCls="icon-save">Zapisz</a>
+
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    function setTinyMCE(selector){
+                                        $(selector).tinymce({
+                                            // Location of TinyMCE script
+
+                                            script_url : '/js/tiny_mce/tiny_mce.js',
+
+                                            // General options
+                                            theme : "advanced",
+                                            //language : "pl",
+                                            plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,nonbreaking,xhtmlxtras,template,advlist",
+                                            //styleselect,formatselect,fontselect,fontsizeselect
+                                            //formatselect,fontselect,fontsizeselect
+                                            // Theme options
+                                            theme_advanced_buttons1 : "undo,redo,|,pasteword,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,forecolor,backcolor,|,image,code,|,bullist,numlist,|,outdent,indent,|,hr,fontselect,fontsizeselect,fullscreen",
+                                            theme_advanced_buttons2 : "",
+                                            theme_advanced_buttons3:"",
+                                            theme_advanced_toolbar_location : "top",
+                                            theme_advanced_toolbar_align : "left",
+                                            theme_advanced_resizing : true,
+
+                                            // Example content CSS (should be your site CSS)
+                                            content_css : "css/content.css",
+                                            skin : "o2k7",
+                                            skin_variant : "silver",
+                                            // Drop lists for link/image/media/template dialogs
+                                            template_external_list_url : "lists/template_list.js",
+                                            external_link_list_url : "lists/link_list.js",
+                                            external_image_list_url : "lists/image_list.js",
+                                            media_external_list_url : "lists/media_list.js",
+
+                                            // Replace values for the template plugin
+                                            template_replace_values : {
+                                                username : "Some User",
+                                                staffid : "991234"
+                                            }
+                                        });
+                                    }
+                                    function showEditContent(){
+                                        //alert('click');
+                                        $('#text-editor-contet-show').hide();
+                                        $('#edit-button-content').hide();
+
+                                        setTinyMCE('#content-editor');
+                                        $('#content-editor').show();
+                                    }
+                                    function back(){
+                                        $.messager.confirm('Uwaga!','Czy napewno wrócić?',function(r){
+                                            if (r){
+                                                window.location.href='<?= $urlBack; ?>';
+                                            }
+                                        });
+                                    }
+                                    function save(redirect){
+                                        $('#form-desc').form('submit',{
+                                            onSubmit:function(){
+                                                return $(this).form('validate');
+                                            },
+                                            success:function(data){
+                                                if(redirect){
+                                                    window.location.href='<?= $urlBack; ?>';
+                                                }else{
+                                                    $.messager.alert('Info', 'Zmiany zostały zapisane', 'info');
+                                                }
+                                            }
+                                        });
+                                    }
+                                    /**
+                                     *@Author: Arnold Sikorski
+                                     *
+                                     *Usuwanie pliku
+                                     */
+                                    function deteteItem(fileid){
+
+                                        $.messager.confirm('Uwaga!','Czy napewno chcesz usunąć element?',function(r){
+                                            if (r){
+
+                                                $.ajax({
+                                                    url: '/pl/sites/ajax/deleterelation',
+                                                    global: false,
+                                                    type: "POST",
+                                                    data: {id :fileid},
+                                                    dataType: "json",
+                                                    async:false,
+                                                    success: function(msg){
+                                                        if(msg.success){
+                                                            $.messager.alert('Uwaga','Element został usuniety');
+                                                            $('#list-files').datagrid('reload');
+                                                        }else{
+                                                            $.messager.alert('Uwaga','Nie usunieto elementu');
+                                                        }
+
+                                                    }
+                                                });
+                                            }
+
+                                        });
+                                    }
+                                    /*koniec*/
+
+</script>
+<script type="text/javascript">
+
+
+                                        $('.date-time').datetimebox({
+                                            showSeconds:true
+                                        });
+
+                                        $('#form-desc').form({
+                                            url:'<?= $urlSave; ?>',
+                                            onSubmit: function(){
+                                                // do some check
+                                                // return false to prevent submit;
+                                            },
+                                            success:function(data){
+                                                window.location.href="<?= $urlBack; ?>";
+
+                                            }
+                                        });
+                                        /*lista plików*/
+                                        $('#list-files').datagrid({
+                                            url:'<?= $urlGetRelations; ?>',
+                                            view: detailview,
+                                            pagination:false,
+                                            rownumbers:false,
+                                            showFooter:false,
+                                            onLoadSuccess:function(data){
+                                            },
+                                            detailFormatter:function(index,row){
+                                                return '<div class="ddv"></div>';
+                                            },
+                                            columns:[[
+
+                                                    {field:'thumb',title:'Miniatura',width:100,align:'center'},
+                                                    {field:'name',title:'Nazwa pliku',width:500},
+                                                    {field:'size',title:'Rozmiar',width:100,align:'center'},
+                                                    {field:'date',title:'Data dodania',width:150,align:'center'},
+                                                    {field:'action',title:'Akcja',width:150,align:'center'}
+                                                ]],
+                                            onExpandRow: function(index,row){
+
+                                                var ddv = $(this).datagrid('getRowDetail',index).find('div.ddv');
+                                                ddv.panel({
+                                                    border:false,
+                                                    cache:true,
+                                                    href:'/pl/sites/tree/editfile?id='+row.id,
+                                                    onLoad:function(){
+                                                        $('#list-files').datagrid('fixDetailRowHeight',index);
+                                                        $('#list-files').datagrid('selectRow',index);
+                                                        $('#list-files').datagrid('getRowDetail',index).find('form').form('load',row);
+
+                                                    }
+                                                });
+                                                $('#list-files').datagrid('fixDetailRowHeight',index);
+                                                //$('#tree-items').datagrid('collapseAll');
+                                            }
+                                        });
+                                        /*lista plików*/
+                                        /*upload plików*/
+                                        $("#fileUpload").fileUpload({
+                                            'uploader': '/flash/uploader.swf',
+                                            'cancelImg': '/img/elements/cancel.png',
+                                            'script': '<?= $this->options['http']['admin']; ?>',
+                                            'queueSizeLimit':1,
+                                            'simUploadLimit':1,
+                                            'displayData': 'speed',
+                                            'scriptData': {'action':'upload',
+                                                'modules':'sites',
+                                                'lang':'pl',
+                                                'item':'<?= $row['id'] ?>'},
+                                            'multi': true,
+                                            'auto': true,
+                                            'buttonText':'Wybierz',
+                                            'displayData': 'percentage',
+                                            onComplete: function (evt, queueID, fileObj, response, data) {
+                                            },
+                                            onError     : function (event,ID,fileObj,errorObj) {
+                                                //alert(errorObj.type + ' Error: ' + errorObj.info);
+                                                $.messager.alert('Info', 'Podczas wysyłania pliku nastąpił błąd', 'info');
+                                            },
+                                            onAllComplete : function (event,data){
+
+                                                $.messager.alert('Info', 'Wszystkie pliki zostały wyslane', 'info');
+                                                $('#list-files').datagrid('reload');
+                                            }
+            });
+
+</script>

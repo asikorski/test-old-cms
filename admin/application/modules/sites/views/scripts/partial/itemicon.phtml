@@ -1,0 +1,53 @@
+
+<?php
+
+$files = ($this->row) ? $this->row : false;
+
+if ($files) {
+    $sum = 0;
+    foreach ($files as $file) {
+        $sum = $sum + $file['size'];
+    }
+    $fileType = $this->FileType($files[0]['filename']);
+    if ($fileType[0] == 'image') {
+
+        $imageURL = $this->ImgToUrl($files[0]['filename'],
+                        'sites',
+                        'pl',
+                        array('image_ratio_crop' => 'top',
+                            'image_resize' => true,
+                            'image_x' => 35,
+                            'image_y' => 35,));
+    } else {
+        //echo "inne";
+        $imageURL = $this->ImgToUrl($this->FileIcon($fileType[0]),
+                        null,
+                        null,
+                        array('image_resize' => false,
+                            'set_image_public_path' => '/img/icons/files',
+                            'image_ratio_crop' => 'top',
+                            'image_resize' => true,
+                            'image_x' => 35,
+                            'image_y' => 35,));
+    }
+    echo $this->img($imageURL, true,
+            array('alt' => 'thumb',
+                'title' => 'Plików powiązanych z elementem: ' . count($files).' , zajmują w sumie: '.$this->formatFileSize($sum)));
+}else{
+    echo $this->img($this->ImgToUrl('file_html.png',
+                        null,
+                        null,
+                        array('image_resize' => false,
+                            'set_image_public_path' => '/img/icons/files',
+                            'image_ratio_crop' => 'top',
+                            'image_resize' => true,
+                            'image_x' => 35,
+                            'image_y' => 35,)), true,
+            array('alt' => 'thumb',
+                'title' => 'Bez plików'));
+}
+?>
+
+
+
+

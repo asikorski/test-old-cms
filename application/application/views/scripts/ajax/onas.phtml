@@ -1,0 +1,103 @@
+<script type="text/javascript"> 
+    $(document).ready(function(){ 
+        $(".scrollable").scrollable({ vertical: true, mousewheel: true });	
+
+    });
+</script>
+<div id="actions">
+    <a class="prev">&laquo; Back</a>
+    <a class="next">More pictures &raquo;</a>
+</div>
+
+<!-- root element for scrollable -->
+<div class="scrollable vertical">
+
+    <div class="items">
+
+        <!-- first element. contains three rows -->
+        <?php for ($i = 0; $i < 3; $i++): ?>
+            <div class="width100">
+
+                <!-- first row -->
+                <div class="item">
+
+                    <!-- image -->
+                    <div class="img_ref">
+                        <img src="/img/LOT_CATERING.jpg" width="190" />
+                    </div>
+                    <div class="title_ref">
+                        <h2>Lot Catering</h2>
+                    </div>
+                    <div class="short_desc_ref">
+                        short desc short desc short desc short desc short desc short desc short desc short desc 
+                        short desc short desc short desc short desc short desc short desc 
+                        short desc short desc short desc short desc short desc short desc 
+                        short desc short desc short desc short desc short desc short desc 
+                        short desc short desc short desc short desc 
+                    </div>
+
+                </div>
+                <div class="item">
+                    <!-- image -->
+                    <div class="img_ref">
+                        <img src="/img/LOT_CATERING.jpg" width="190" />
+                    </div>
+                    <div class="title_ref">
+                        <h2>Lot Catering</h2>
+                    </div>
+                    <div class="short_desc_ref">
+                        short desc short desc short desc short desc short desc short desc short desc short desc 
+                        short desc short desc short desc short desc short desc short desc 
+                        short desc short desc short desc short desc short desc short desc 
+                        short desc short desc short desc short desc short desc short desc 
+                        short desc short desc short desc short desc 
+                    </div>
+                </div>
+            </div>
+        <?php endfor; ?>
+
+    </div>
+
+</div>
+
+<style>
+    .width100{
+        width: 910px !important;
+    }
+    .img_ref{
+        float: left;
+    }
+    .title_ref{
+        float: left;
+        margin-left: 20px;
+        width: 400px;
+    }
+    .short_desc_ref{
+        width: 700px;
+        float: left;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+    /* root element for scrollable */
+    .scrollable {
+
+        /* required settings */
+        position:relative;
+        overflow:hidden;
+
+        /* vertical scrollables have typically larger height than width but not now */
+        height: 400px;
+        width: 910px;
+    }
+    .item{
+        height: 200px;
+    }
+    /* root element for scrollable items */
+    .scrollable .items {
+        position:absolute;
+
+        /* this time we have very large space for the height */
+        height:20000em;
+    }
+
+</style>

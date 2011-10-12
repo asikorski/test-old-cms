@@ -1,0 +1,83 @@
+<script type="text/javascript"> 
+    $(document).ready(function(){ 
+        //$("#site_left_content").tabs("#site_left_content div.pane", {tabs: 'h2', effect: 'slide', initialIndex: null});
+        $(".more_info[rel]").overlay({mask: '#000', effect: 'apple'});
+    });
+</script>
+
+<div id="site_top">
+    <div class="text_site_top">oferta</div>
+</div>
+<div id="site_left_content">
+    <?php for ($i = 0; $i < 7; $i++): ?>
+        <div class="oferta_box">
+            <img style="margin-right: 5px;" src="/img/aaa_03.jpg" />
+            <h2>Fotografia ślubna</h2>
+            <div class="pane" style="display:block;">
+                <div class="oferta_box_left">
+                    short description short description short<br/> 
+                    short description short description short <br/>
+                   
+                    <br/><span class="more_info" rel="#more<?php echo $i?>">zobacz więcej</span>
+                </div>
+                <div class="oferta_box_right">
+                    <span><img src="/img/pdf_icon.png" /></span>
+                    <div id="more<?php echo $i?>" style="display:none">
+                        <div class="more_data">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endfor; ?>
+
+
+
+</div>
+<style>
+    #site_left_content{
+        width: 900px;
+        float: left;
+    }
+    #site_left_content h2{
+        cursor: pointer;
+        font-size: 14px;
+    }
+    #site_left_content a{
+        color: white;
+    }
+    .oferta_box{
+        width: 910px;
+        min-width: 50px;
+        margin-bottom: 20px;
+        float: left;
+    }
+    .oferta_box_left{
+        width: 600px;     
+        float: left;
+    }
+    .oferta_box_right{
+        width: 200px;
+        float: right;
+    }
+    .more_info{
+        color: #FBA81A;
+        display: block;
+        width: 100%;
+        text-align: right;
+        font-size: 10px;
+    }
+    .more_data{
+        width: 700px;
+        color: black;
+        background: white;
+        border: 1px solid #FBA81A;
+        padding: 10px;
+        font-size: 13px;
+    }
+</style>

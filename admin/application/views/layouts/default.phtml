@@ -1,0 +1,63 @@
+<?php echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>CMS 4.0</title>
+        <meta name="language" content="pl" />
+        <meta name="description" content="<?php echo $this->placeholder('description') ?>" />
+        <meta name="keywords" content="<?php echo $this->placeholder('keywords') ?>" />
+        <meta name="author" content="MilleniumStudio" />
+        <meta name="robots" content="index,follow" />
+        <meta name="google-site-verification" content="Mb7cwewyHgq89zJmhbLoS41T4VVhbdkxaOwKNBMWTK8" />
+      <?php
+        $this->headLink()->appendStylesheet($this->baseUrl() . '/css/clearfix.css?' . time())
+                ->appendStylesheet($this->baseUrl() . '/css/styles.css?' . time())
+                ->appendStylesheet($this->baseUrl() . '/css/famfam.css?' . time())
+                ->appendStylesheet($this->baseUrl() . '/js/easyui/themes/icon.css?' . time())
+                ->appendStylesheet($this->baseUrl() . '/js/easyui/themes/gray-dontuse/easyui.css?' . time());
+        /**
+         * Dodaje odpowiednie skrypty
+         */
+        $this->headScript()->appendFile($this->baseUrl() . '/js/jquery-1.6.js')
+                ->appendFile($this->baseUrl() . '/js/jquery-ui-1.8.12.custom.min.js')
+                ->appendFile($this->baseUrl() . '/js/jquery.uploadify.js')
+                ->appendFile($this->baseUrl() . '/js/swfobject.js')
+               // ->appendFile($this->baseUrl() . '/js/ckeditor/ckeditor.js')
+                ->appendFile($this->baseUrl() . '/js/easyui/jquery.easyui.min.js')
+                ->appendFile($this->baseUrl() . '/js/tiny_mce/jquery.tinymce.js')
+                ->appendFile('http://www.jeasyui.com/easyui/datagrid-detailview.js');
+
+
+        /**
+         * Wyswietlam skryoty i nagłówki
+         *
+         */
+        echo $this->headLink();
+        echo $this->headScript();
+
+
+?>
+    </head>
+    <body class="easyui-layout-body">
+        <script type="text/javascript">
+            $(document).ready(function() {
+            $('.easyui-layout-body').layout();
+            $('.easyui-layout-body').layout('collapse','south');
+            });
+        </script>
+<!--    <div region="south" title="Debug" border ="true" split="true" style="height:0px;"></div>-->
+    <div region="center" title="center title" style="padding:5px;background:#eee;">
+        <?php echo $this->oWidgetModulesList;?>
+
+    </div>
+        <div id ="dialog" title ="Zobacz informacje o MilleniumCMS">o nas</div>
+        <div id ="background-image-replace-x"></div>
+        <!--Modules list-->
+
+        <!--/Modules list-->
+        <?php echo $this->layout()->content ?>
+
+        <!-- Wyswietlanie widgetu Facebook-->
+
+    </body>
+</html>

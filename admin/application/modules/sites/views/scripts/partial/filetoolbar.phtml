@@ -1,0 +1,58 @@
+<?php 
+$row = $this->row;
+$activeClass = ($row['active']) ? 'sprite-accept' : 'sprite-cross';
+?>
+
+<ul class ="easyui-links-list">
+    <li style= "float:left;margin-right:2px;">
+        <?=
+        $this->atag('#',null,
+                array('class' => ($row['active']) ? 'sprite-accept' : 'sprite-cross',
+                    'style' => 'display:block;"',
+                    'title' => ($row['active']) ? 'Aktywny' : 'Niekatywny'));
+        ?>
+    </li>
+    <li style= "float:left;margin-right:2px;" >
+        <?=
+        $this->atag('#',null,
+                array('class' => 'sprite-cancel',
+                    'style' => 'display:block;"',
+                    'title' => 'Usuń plik',
+                    'onClick'=>'deteteItem('.$row['id'].')'));
+        ?>
+    </li>
+    <li style= "float:left;margin-right:2px;" >
+        <?=
+        $this->atag('#',null,
+                array('class' => 'sprite-page_edit',
+                    'style' => 'display:block;"',
+                    'title' => 'Edytuj plik (nieaktywne)'));
+        ?>
+    </li>
+    <?php if ($this->filetype[0]=='image'):?>
+    <li style= "float:left;margin-right:2px;" >
+        <?=
+        $this->atag('#',null,
+                array('class' => 'sprite-photo',
+                    'style' => 'display:block;"',
+                    'title' => 'Podgląd obrazka'));
+        ?>
+    </li>
+    <?php endif; ?>
+    <li style= "float:left;margin-right:2px;" >
+        <?=
+        $this->atag($this->FileToDownload($row['filename'],'sites','pl'),null,
+                array('class' => 'sprite-disk',
+                    'style' => 'display:block;"',
+                    'title' => 'Pobierz plik'));
+        ?>
+    </li>
+</ul>
+<?php
+/**
+ * Pliki powiazane - naraize niewidoczne
+ * <li style= "float:left;margin-right:2px;" >
+        <a title ="Zobacz pliki powiązane" class ="sprite-folder" style ="display:block;" href="#"></a>
+    </li>
+ */
+?>

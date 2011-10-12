@@ -1,0 +1,23 @@
+<div id="info">
+    <ul>
+        <li><a href="/">strona główna</a></li>
+        <li><a href="/wylegarnia">wylęgarnia</a></li>
+        <li><a href="#k">kontakt</a></li>
+        <li class="login"><a href="#l">logowanie</a></li>
+    </ul>
+</div>
+<div id="promo">
+    <a href="/article">napisz i wygraj</a>
+</div>
+<?php
+echo $this->layout()->menu->render();
+?>
+<div id="menusearch">
+    <div class="search_input">
+        <input class="input_search" value="szukaj na stronie..." type="text" />
+        <input class="submit_search" type="submit" value=""/>
+    </div>
+    <div id="facebook">
+        <a href="#facebook">find us on facebook</a>
+    </div>
+</div>

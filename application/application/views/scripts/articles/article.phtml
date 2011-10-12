@@ -1,0 +1,157 @@
+<?php //new var_dump($this->data);die;    ?>
+<h2 class="corners">Kategoria: <?php echo $this->category; ?></h2>
+<div id="top_article">
+    <div id="article_img" class="corners">
+        <?php
+        $src = '';
+        if (isset($this->data['files']) && !empty ($this->data['files'])) {
+            $src = $this->ImgToUrl($this->data['files'][0]['filename'], 'sites', 'pl', array('image_resize' => true,
+                'image_x' => 200,
+                'image_y' => 120,
+                'image_ratio_crop' => 'top'));
+        } else {
+            $src = '/img/' . $this->category . 'Big.jpg';
+        }
+        ?>
+        <img src="<?php echo $src; ?>" />
+    </div>
+
+    <div id="article_vote_box">
+        <div id="article_vote_box_vote" class="slim_box corners">
+            <ul>
+                <li><a class="voteButton" rel="1" id="dobry" href="#">dobry</a></li>
+                <li><a class="voteButton" rel="0" id="sredni" href="#">sredni</a></li>
+                <li><a class="voteButton" rel='-1' id="slaby" href="#">zly</a></li>
+            </ul>
+        </div>
+        
+        <div id="article_vote_box_vote_title" class="slim_box corners">
+            <?php echo $this->vote; ?>
+        </div>
+        <div id="article_vote_box_vote_stat" class="slim_box corners">
+            Zobacz statystyki artykułu
+        </div>
+
+    </div>
+
+    <div id="article_info_box">
+        <div class="corners bar_article">
+            <span class="news_item_pkt info item">punkty</span>
+            <span class="item_left">+235</span>
+        </div>
+        <div class="corners bar_article">
+            <span class="news_item_user info item">autor</span>
+            <span class="item_left">DonPedro</span>
+        </div>
+        <div class="corners bar_article">
+            <span class="news_item_pos info item">ranking</span>
+            <span class="item_left">135 miejsce</span>
+        </div>
+        <div class="corners bar_article">
+            <span class="news_item_date info item">dodany</span>
+            <span class="item_left">12.12.2011r</span>
+        </div>
+    </div>
+
+</div>
+<div id="article_title">
+    <h3><?php echo $this->data['item']['short_desc']; ?></h3>
+</div>
+<div id="article_lead">
+    <?php echo $this->data['item']['lead']; ?>
+</div>
+<div id="article_content">
+    <?php echo $this->data['item']['desc']; ?>
+</div>
+<?php if (isset($this->data['files'])): ?>
+    <div id="article_gallery">
+        <h3 class="article_h3">galeria artykulu</h3>
+        <?php foreach ($this->data['files'] as $itemFile): ?>
+            <?php
+            $src = '';
+            $src = $this->ImgToUrl($itemFile['filename'], 'sites', 'pl', array('image_resize' => true,
+                'image_x' => 168,
+                'image_y' => 100,
+                'image_ratio_crop' => 'top'));
+            $fancyHref = $this->ImgToUrl($itemFile['filename'], 'sites', 'pl', array('image_resize' => false,
+                    ));
+            ?>
+            <?php if ($src): ?>
+                <div class="article_gallery_item">
+                    <a class="grouped_elements" rel="group1" href="<?php echo $fancyHref; ?>">
+                        <img alt="img" src="<?php echo $src ?>" />
+                    </a>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+<div id="article_footer">
+    <div id="action_button">
+        <ul>
+            <li><a id="dodajKontr" href="#d" class="corners">dodaj kontr-artykuł</a></li>
+            <li><a id="wyslijArt" href="#w" class="corners">wyślij artykuł</a></li>
+            <li><a id="drukArt" href="#d" class="corners">drukuj artykuł</a></li>
+            <li><a id="zglosNar" href="#z" class="corners">zgłoś naruszenie</a></li>
+        </ul>
+    </div>
+    <div id="article_widget_box">
+        <div id="google_widget">
+            <g:plusone size="medium"></g:plusone>
+        </div>
+        <div id="facebook_widget">
+            <iframe src="http://www.facebook.com/plugins/like.php?app_id=203570576372972&amp;href&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:75px; height:35px;" allowTransparency="true"></iframe>
+        </div>
+        <ul>
+            <li><a id="twiter_w" href="#">wykop</a></li>
+            <li><a id="nk_w" href="#">wykop</a></li>
+            <li><a id="wykop_w" href="#">wykop</a></li>
+            <li><a id="myspace_w" href="#">wykop</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="kontr_article">
+    <h3 class="article_h3">kontr-artykuły</h3>
+    <?php for ($i = 0; $i < 4; $i++): ?>
+        <div class="kontr_article_item">
+            <h3>Przykład tytułu artykułu na jakies 60 znaków</h3>
+            <span class="kontr_item_more"><a class="corners" href="#more">czytaj dalej &gt;&gt;</a></span>
+        </div>
+    <?php endfor; ?>
+</div>
+<div id="linked_article">
+    <h3 class="article_h3">powiazane artykuły</h3>
+    <?php for ($i = 0; $i < 4; $i++): ?>
+        <div class="kontr_article_item">
+            <h3>Przykład tytułu artykułu na jakies 60 znaków</h3>
+            <span class="kontr_item_more"><a class="corners" href="#more">czytaj dalej &gt;&gt;</a></span>
+        </div>
+    <?php endfor; ?>
+</div>
+<script type="text/javascript">
+    $(document).ready( function (){
+        //przycieski glosowania
+        $('.voteButton').one("click", function() {
+
+            var position = $(this).css('background-position'); 
+            $('.voteButton').css('background-position' , '0 26px');
+            $(this).css('background-position', position); 
+            $('.voteButton').unbind();
+            $.ajax({
+                url: "/ajax/addvote",
+                global: false,
+                type: "POST",
+                data: {id : <?php echo $this->data['item']['id'] ?>,
+                       vote : this.getAttribute('rel'),
+                       user: <?php echo rand(123,319);?>},
+                dataType: "html",
+                async:false,
+                success: function(msg){ 
+                    $('#article_vote_box_vote_title').html(msg);
+                }
+            });
+        });
+    });
+</script>

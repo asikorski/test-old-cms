@@ -1,0 +1,64 @@
+<?php
+/**
+ * http://framework.zend.com/wiki/display/ZFPROP/Zend_Application+-+Ben+Scholzen
+ * http://akrabat.com/zend-framework/bootstrapping-modules-in-zf-1-8/
+ * 
+ * @author m0s
+ *
+ */
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+	protected function _initConfiguration()
+    {
+    	$app = $this->getApplication();
+    	$config = $app->getOptions();
+    	
+    	if (APPLICATION_ENV == 'development') {
+	    	error_reporting(E_ALL & E_STRICT);
+	    	if (isset($config['phpsettings'])) {
+		    	foreach ($config['phpsettings'] as $setting => $value) {
+		    		ini_set($setting, $value);
+		    	}  
+	    	}
+    	}
+    }
+    
+	protected function _initAutoload()
+    {
+		$autoloader = Zend_Loader_Autoloader::getInstance();
+		$autoloader->setFallbackAutoloader(true);
+		
+		return $autoloader;
+    }
+    
+    protected function _initController()
+    {
+    	$this->bootstrap('FrontController'); 
+    	$controller = $this->getResource('FrontController');
+		$modules = $controller->getControllerDirectory();
+		$controller->setParam('prefixDefaultModule', true);
+		
+    	$controller->registerPlugin(
+    		new Bluess_Modules_Loader($modules)
+    	);
+    	
+    	return $controller;
+    }
+
+    protected function _initRequest()
+    {
+        $this->bootstrap('FrontController');
+        $front = $this->getResource('FrontController');
+        $request = $front->getRequest();
+    	if (null === $front->getRequest()) {
+            $request = new Zend_Controller_Request_Http();
+            $front->setRequest($request);
+        }
+    	return $request;        
+    } 	
+    
+    protected function _initModules()
+    {
+		// Call to prefent ZF from loading all modules
+    }
+}

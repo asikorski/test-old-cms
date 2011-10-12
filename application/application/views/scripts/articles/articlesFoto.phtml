@@ -1,0 +1,62 @@
+<script>
+    $(document).ready(function(){
+
+        $("#fileUpload").fileUpload({
+            'uploader': '/flash/uploader.swf',
+            'cancelImg': '/img/elements/cancel.png',
+            'script': '/upload',
+            'displayData': 'speed',
+            'scriptData': { 
+                'id':'<?php echo $this->articleId; ?>'},
+            'removeCompleted' : false,
+            'multi': false,
+            'simUploadLimit' : 1,
+            'auto': true,
+            'buttonText':'Wybierz',
+            'displayData': 'percentage',
+            onComplete: function (evt, queueID, fileObj, response, data) {
+                $('#fileUploadUploader').hide();
+                $('#addFileGal').show();
+            },
+            onError     : function (event,ID,fileObj,errorObj) {
+                alert(errorObj.type + ' Error: ' + errorObj.info);
+            }
+        });
+        $("#fileUploadGal").fileUpload({
+            'uploader': '/flash/uploader.swf',
+            'cancelImg': '/img/elements/cancel.png',
+            'script': '/upload',
+            'displayData': 'speed',
+            'scriptData': { 
+                'id':'<?php echo $this->articleId; ?>'},
+            'removeCompleted' : false,
+            'simUploadLimit' : 12,
+            'multi': true,
+            'auto': true,
+            'buttonText':'Wybierz',
+            'displayData': 'percentage',
+            onComplete: function (evt, queueID, fileObj, response, data) {
+                
+            },
+            onError     : function (event,ID,fileObj,errorObj) {
+                alert(errorObj.type + ' Error: ' + errorObj.info);
+            }
+        });
+    });
+</script>
+
+<h2 class="corners">Dodaj zdjęcia</h2>
+
+<div id="addFile">
+    <span class="labelAddFoto">Dodaj zdjęcie główne</span>
+<a href="#"  id ="fileUpload"  ></a>
+</div>
+<hr>
+<div id="addFileGal">
+    <span class="labelAddFoto">Dodaj zdjęcia do galeri</span>
+<a href="#"  id ="fileUploadGal"  ></a>
+</div>
+
+<!--<div id="goToArticle">
+    <a href="">Przejdz do artykułu</a>
+</div>-->

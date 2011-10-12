@@ -1,0 +1,56 @@
+<script type="text/javascript"> 
+    $(document).ready(function(){ 
+        
+    });
+</script>
+<?php
+$array = array('siema', 'siema1', 'siema2', 'siema3', 'siema4');
+?>
+<div id="site_top">
+    <div class="text_site_top">referencje</div>
+</div>
+<div id="site_left_content" class="width100">
+
+<?php foreach ($array as $item) :?>
+    <div class="item">
+        <div class="img_ref">
+            <img src="/img/LOT_CATERING.jpg" width="168" />
+        </div>
+        <div class="title_ref">
+            <h2>cos</h2>
+        </div>
+        <div class="short_desc_ref">
+            short desc short desc short desc short desc short desc short desc short desc short desc 
+            short desc short desc short desc short desc short desc short desc 
+            short desc short desc short desc short desc short desc short desc 
+            short desc short desc short desc short desc short desc short desc 
+            short desc short desc short desc short desc 
+        </div>
+    </div>
+<?php endforeach; ?>
+</div>
+
+<style>
+    .width100{
+        width: 910px !important;
+    }
+    .img_ref{
+        float: left;
+    }
+    .title_ref{
+        float: left;
+        margin-left: 20px;
+        width: 400px;
+    }
+    .short_desc_ref{
+        width: 700px;
+        float: left;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+    .width100 .item{
+        width: 100%;
+        float: left;
+        margin-bottom: 15px;
+    }
+</style>

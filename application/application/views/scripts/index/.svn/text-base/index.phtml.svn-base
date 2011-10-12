@@ -1,0 +1,21 @@
+<?php
+if(isset($this->saveStatus)){
+    ?> <div class = "border-msg"><?php echo $this->saveStatus;?></div><?php
+} ?>
+<div class = "border">
+<h1><?php echo $this->contents->name ?></h1>
+<?php echo html_entity_decode($this->contents->desc); ?>
+</div>
+
+	<div class = "form clearfix">
+	<h1>Zgłoś incydent</h1>
+	<span class ="bold">Co się stało?</span>
+	<form action="eventsave" method="post" name="event" target="_self">
+		<textarea class = "text" name="event_text" cols="" rows="5"></textarea>
+                <div class ="title-email">Twój e-mail</div>
+		<input  class ="email" name="event_email" type="text" value="sd" />
+		<input class = "button" name="event_button" type="submit" value="Zgłoś!" />
+		
+	</form>
+</div>
+

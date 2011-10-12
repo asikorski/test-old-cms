@@ -1,0 +1,32 @@
+<?php
+
+$parmsRow = $this->parmsRow;
+$row = $this->row;
+$filetype = $this->filetype;
+
+
+
+if ($filetype[0] == 'image') {
+    /* generauje miniature */
+    $imageURL = $this->ImgToUrl($row['filename'],
+                    $parmsRow['module'],
+                    $parmsRow['language'],
+                    array('image_ratio_crop' => 'top',
+                        'image_resize' => true,
+                        'image_x' => 75,
+                        'image_y' => 75,));
+
+
+    /* geenrujemy miniature dla obrazka */
+} else {
+    //echo "inne";
+    $imageURL = $this->ImgToUrl($this->FileIcon($filetype[0]),
+                    null,
+                    null,
+                    array('image_resize' => false,
+                        'set_image_public_path' => '/img/icons/files'));
+}
+/*generuje ikone lub obrazek*/
+echo $this->img($imageURL, true,
+        array('alt' => 'thumb'));
+?>

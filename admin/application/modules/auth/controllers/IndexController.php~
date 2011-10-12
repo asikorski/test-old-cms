@@ -1,0 +1,10 @@
+<?php
+class Default_IndexController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+       echo Foo::test();
+       echo Foo_Bar::test();
+       echo "Default";
+    }
+}

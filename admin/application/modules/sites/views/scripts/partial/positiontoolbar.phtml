@@ -1,0 +1,57 @@
+<?php
+$row = $this->row;
+?>
+
+<ul class ="easyui-links-list" style="height:18px;margin:0px auto;padding: 0;width: 60px;">
+    <li style= "float:left;margin-right:2px;">
+        <a title ="Przesuń w dół" href="#" onClick="MoveUp(<?= $row['id'];?>);" class ="sprite-arrow_down" style ="display:block;"></a>
+    </li>
+    <li style= "float:left;margin-right:2px;" >
+        <a title ="Przesuń w góre" onClick="MoveDown(<?= $row['id'];?>);" class ="sprite-arrow_up" style ="display:block;" href="#"></a>
+    </li>
+    <li style= "float:left;margin-right:2px;" >
+        <a title ="Przenieś magicznie" class ="sprite-table_lightning" style ="display:block;"href="#"></a>
+    </li>
+
+</ul>
+<?php
+/**
+ * Pliki powiazane - naraize niewidoczne
+ * <li style= "float:left;margin-right:2px;" >
+  <a title ="Zobacz pliki powiązane" class ="sprite-folder" style ="display:block;" href="#"></a>
+  </li>
+ */
+?>
+<script type="text/javascript">
+    function MoveUp(item_id){
+        $.ajax({
+            url: '/pl/sites/ajax/moveupitem',
+            global: false,
+            type: "POST",
+            data: {id : item_id},
+            dataType: "html",
+            async:false,
+            success: function(msg){
+                $('#tree-items').datagrid('reload');
+                //$('#tree-items').datagrid('selectRow',item_id);
+
+            }
+        });
+    }
+        function MoveDown(item_id){
+        $.ajax({
+            url: '/pl/sites/ajax/movedownitem',
+            global: false,
+            type: "POST",
+            data: {id : item_id},
+            dataType: "html",
+            async:false,
+            success: function(msg){
+                $('#tree-items').datagrid('reload');
+                //$('#tree-items').datagrid('selectRow',1);
+
+            }
+        });
+    }
+</script>
+

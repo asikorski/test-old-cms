@@ -1,0 +1,162 @@
+<?php
+/*
+ * echo $this->url(array('module' => 'sites',
+                            'controller' => 'tree',
+                            'action' => 'content',
+                            'id' => $row['id'],
+                            'category' => $row['category_id']));
+ */
+$row = $this->row;
+$files = ($this->files)?$this->files:false;
+$fileType = $this->FilesEditor;
+?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //$('input[name=name_url]').attr("disabled", true);
+        $('input[name=name]').keyup(function (){
+            var value = $(this).val();
+            $('input[name=name_url]').val(friendlyUrl(value));
+
+        });
+    });
+
+    function friendlyUrl(value){
+        value = value.toLowerCase();
+        var friendly = value
+        .replace(/\s/g,'-')
+        .replace(/ą/g, 'a').replace(/Ą/g, 'A')
+        .replace(/ć/g, 'c').replace(/Ć/g, 'C')
+        .replace(/ę/g, 'e').replace(/Ę/g, 'E')
+        .replace(/ł/g, 'l').replace(/Ł/g, 'L')
+        .replace(/ń/g, 'n').replace(/Ń/g, 'N')
+        .replace(/ó/g, 'o').replace(/Ó/g, 'O')
+        .replace(/ś/g, 's').replace(/Ś/g, 'S')
+        .replace(/ż/g, 'z').replace(/Ż/g, 'Z')
+        .replace(/ź/g, 'z').replace(/Ź/g, 'Z')
+        .replace(/^\s+|\s+$/g, "")
+        .replace(/[_|\s]+/g, "-")
+        .replace(/[^a-z0-9-]+/g, "")
+        .replace(/[-]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        return friendly;
+    }
+
+</script>
+<div class ="row-detail-body">
+    <form id ="form-send-<?php echo $row['id']; ?>"method="post">
+        <table class="dv-table" style="width:100%;padding:5px;margin-top:5px;">
+            <tbody><tr>
+                    <td>Nazwa</td>
+                    <td>
+                        <?= $this->formText('name',
+                                $row['name'],
+                                array('class' => 'easyui-validatebox',
+                                    'required' => 'true',
+                                    'title'=>'Wprowadź nazwe (max 255 znaków)'));
+                        ?>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Krótki opis</td>
+                    <td>
+                        <?= $this->formTextarea('short_desc',
+                                $row['short_desc'],
+                                array('class' => 'easyui-validatebox',
+                                    'required' => 'false',
+                                    'style'=>'height:60px;',
+                                    'title'=>'Wprowadź krótki opis'));
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Adres URL</td>
+                    <td>
+                        <?= $this->formText('name_url',
+                                $row['name_url'],
+                                array('class' => 'easyui-validatebox',
+                                    'required' => 'false'));
+                        ?>                   
+                    </td>
+                </tr>
+                <tr>
+                    <td>ord</td>
+                    <td>
+                        <?= $this->formText('ord',
+                                $row['ord'],
+                                array('class' => 'easyui-validatebox',
+                                    'required' => 'false'));
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Widoczność:</td>
+                    <td>
+                        <?= $this->formCheckbox('active', (((int)$row['active'])? 'checked':null), array(
+                            'checked' => '1',
+                            'unChecked' => '0'
+                        ));
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pliki powiązane <?= ($files)?'('.count($files).')':'';?>:</td>
+                    <td>
+                        <?php if($files):?>
+                        <?php
+                        echo $this->partial('partial/filelistthumb.phtml',
+                            array('files' => $files));
+                        ?>
+                        <?php else:?>
+                        <strong>Brak plików powiązanych</strong>
+                        <?php endif;?>
+
+                    </td>
+                </tr>
+
+            </tbody></table>
+        <div style="padding:5px 0;float:left;">
+            <a href="#" class="easyui-linkbutton"  plain="true" onclick="$('#form-send-<?php echo $row['id']; ?>').submit(); ">Zapisz</a>
+            <a href="#" class="easyui-linkbutton "  plain="true" onclick="">Zamknij</a>
+
+        </div>
+
+    </form>
+    <script type="text/javascript">
+        $().ready(function() {
+
+            $('#cc<?php echo $row['id'] ?>').combogrid({
+                panelWidth:420,
+                value:'006',
+
+                idField:'filename',
+                textField:'filename',
+                url:'/pl/sites/ajax/getrelations?id=<?php echo $row['id'] ?>',
+                columns:[[
+                        {field:'thumb',title:'Miniatura',width:75,align:'center'},
+                        {field:'name',title:'Nazwa',width:120,align:'center'},
+                        {field:'name',title:'Akcja',width:120,align:'center'},
+                        {field:'size',title:'Rozmiar',width:80,align:'center'}
+
+                    ]]
+            });
+            /*kategoria*/
+
+            $('#form-send-<?php echo $row['id']; ?>').form({
+                url:'/pl/sites/ajax/setitem?id=<?php echo $row['id']; ?>',
+                onSubmit: function(){
+                    // do some check
+                    // return false to prevent submit;
+                },
+                success:function(data){
+                    // alert(data)
+                    $('#tree-items').datagrid('reload');
+                    $.messager.alert('Uwaga','Dane zostały zapisane');
+                }
+            });
+        });
+        
+    </script>
+
+
+</div>

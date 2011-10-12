@@ -1,0 +1,46 @@
+<!--
+<div class="ui-widget ui-font-align-inherit">
+    <div  class="ui-state-highlight ui-corner-all">
+        <p><span style ="float:left;" class="ui-icon ui-icon-info"></span>
+            <strong>Uwaga! </strong>Aby otrzymać dostęp do systemu zarzadzania, musisz sie zalogować</p>
+    </div>
+</div>
+-->
+
+
+
+<!--
+<p class ="box-radius3px ui-box-information-container box-success">
+    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+    Aby otrzymać dostęp do sysytemu zarządzania treścia musisz sie zalogować</p>
+-->
+<script type ="text/javascript">
+    $(document).ready(function() {
+        $(function() {
+            $( "#newadmin-box-container" ).dialog({
+                resizable: true,
+                minWidth: 960,
+                position: 'center',
+                closeOnEscape:false,
+                autostart:true
+            });
+            $( "button, input:submit, a", "#changepassword-box-containerr" ).button();
+
+
+        });
+    });
+</script>
+<div id ="newadmin-box-container" title ="Dodaj nowego administratora">
+    <div class="info-bar">
+
+    </div>
+
+    <fieldset style="border: 1px solid #CDCDCD; padding: 8px; padding-bottom:0px; margin: 8px 0">
+        <legend>Dodaj nowego administratora</legend>
+        <?php echo $this->NewAdminForm;?>
+    </fieldset>
+</div>
+
+
+
+

@@ -1,0 +1,21 @@
+<script>
+    $(document).ready(function(){
+        $("#article_form").validationEngine();
+    });
+</script>
+
+
+<h2 class="corners">Dodaj artykuł</h2>
+<?php echo $this->form; ?>
+<script type="text/javascript">
+CKEDITOR.replace( "text",
+{
+	language: "pl",
+	skin : "kama",
+	theme: "default",
+	toolbar: "Basic",
+	width: "740",
+	height: "300",
+	customConfig: "/js/ckeditor/config.js"
+});
+</script>

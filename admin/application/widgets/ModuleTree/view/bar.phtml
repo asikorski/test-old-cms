@@ -1,0 +1,50 @@
+<?php
+/*
+ * Generowanie listy aktualnie zainstalowanych widgetów
+ */
+?>
+<script type ="text/javascript">
+    $(document).ready(function() {
+        var ModulesParentSelector = "a.modules-parent";
+        $(ModulesParentSelector).click(function() {
+            //alert('Handler for .click() called.');
+
+                $('ul.top').find('ul.modules-child').hide();
+                $(this).next('ul.modules-child').show();
+
+        });
+    });
+</script>
+<div id ="modules-list-top" class ="clearfix">
+    <ul class ="top">
+        <!--<button class ="ui-list-icon-login">Zaloguj</button>-->
+        <li class ="left">
+            <a   class ="modules-parent" href ="#"><img   alt="test" title ="sdsds" src="/img/icons-modules/ico-login.png"/></a>
+            <ul class ="modules-child">
+                <li class ="left">
+                    <a  href ="#"><img   alt="test" title ="sdsds" src="/img/icons-modules/ico-login.png"/></a>
+                </li>
+                <li class ="left" >
+                    <a  href ="#"><img   alt="test" title ="sdsds" src="/img/icons-modules/ico-login.png"/></a>
+                </li>
+            </ul>
+        </li>
+         <li class ="right">
+            <a   class ="modules-parent" href ="#"><img   alt="test" title ="sdsds" src="/img/icons-modules/ico-login.png"/></a>
+            <ul class ="modules-child">
+                <li class ="left">
+                    <a  href ="#"><img   alt="test" title ="sdsds" src="/img/icons-modules/ico-login.png"/></a>
+                </li>
+                <li class ="left" >
+                    <a  href ="#"><img   alt="test" title ="sdsds" src="/img/icons-modules/ico-login.png"/></a>
+                </li>
+            </ul>
+        </li>
+        <li class ="right">
+            <a class ="modules-parent" href ="#"><img  alt="test" title ="Zaloguj" src="/img/icons-modules/icon-logout.png"/></a>
+        </li>
+        <li class ="right">
+            <a class ="modules-parent" href ="#"><img  id ="module-list-about" alt="test" title ="Zobacz informacje o MilleniumCMS 4.0" src="/img/icons-modules/icon-about.png"/></a>
+        </li>
+    </ul>
+</div>

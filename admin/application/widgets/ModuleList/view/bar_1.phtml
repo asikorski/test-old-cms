@@ -1,0 +1,219 @@
+<?php
+/*
+ * Generowanie listy aktualnie zainstalowanych widgetów
+ */
+?>
+
+<div id ="modules-list-top" class ="clearfix">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#menu-main-top-unicorncms').menubutton({
+                menu: '#menu-main-top-unicorncms-items'
+            });
+            $('#menu-main-top-options').menubutton({
+                menu: '#menu-main-top-options-items'
+            });
+            $('#menu-main-top-plugins').menubutton({
+                menu: '#menu-main-top-plugins-items'
+            });
+            $('#menu-main-top-acount').menubutton({
+                menu: '#menu-main-top-acount-items'
+            });
+            
+        });
+        function openURL(url){
+
+
+            window.location=url;
+
+        }
+
+    </script>
+
+    <a href="javascript:void(0)" class ="menu-main-top" id="menu-main-top-unicorncms">CMS</a>
+    <div id="menu-main-top-unicorncms-items" style="width:150px;">
+        <div onClick ="openURL('<?php echo $this->url(array('language' => 'pl', 'module' => 'default', 'controller' => 'index', 'action' => 'about')); ?>');">Informacje o systemie</div>
+        <div>Strona domowa</div>
+        <div <div onClick ="openURL('<?php echo $this->url(array('language' => 'pl', 'module' => 'default', 'controller' => 'index', 'action' => 'contact')); ?>');">Zgłoś problem</div>
+        <div class="menu-sep"></div>
+        <div iconCls="icon-remove">Zamknij</div>
+    </div>
+
+    <a href="javascript:void(0)" class ="menu-main-top"  id="menu-main-top-options">zarządzanie</a>
+    <div id="menu-main-top-options-items" style="width:150px;">
+        <?php if ($this->user): ?>
+        <div>Backup danych</div>
+        <div>Pliki</div>
+        <div>Dostępy</div>
+        <div>Użytkownicy</div>
+        <div>Rozszerzenia</div>
+        <div>Statystyki</div>
+        <div>Debuger</div>
+        <div class="menu-sep"></div>
+        <div>Wersja językowa</div>
+        <?php else: ?>
+        <div>Brak dostępu</div>
+        <?php endif; ?>
+    </div>
+
+    <a href="javascript:void(0)" class ="menu-main-top"  id="menu-main-top-plugins">dodatki</a>
+    <div id="menu-main-top-plugins-items" style="width:150px;">
+        <?php if ($this->user): ?>
+        <div onClick ="openURL('<?php echo $this->url(array('language' => 'pl', 'module' => 'dynamicsites', 'controller' => 'structure', 'action' => 'categories')); ?>');" >Strony dynamiczne</div>
+        <?php else: ?>
+        <div>Brak dostępu</div>
+        <?php endif; ?>
+    </div>
+
+    <a href="javascript:void(0)" class ="menu-main-top" id="menu-main-top-acount" >moje konto</a>
+    <div id="menu-main-top-acount-items" style="width:150px;">
+        <?php if ($this->user): ?>
+            <div><strong><?php echo $this->user->name; ?></strong></div>
+            <div class="menu-sep"></div>
+            <div onClick ="openURL('<?php echo $this->url(array('language' => 'pl', 'module' => 'auth', 'controller' => 'index', 'action' => 'password')); ?>');">Zmień hasło</div>
+            <div onClick ="openURL('<?php echo $this->url(array('language' => 'pl', 'module' => 'auth', 'controller' => 'index', 'action' => 'user')); ?>');">Ustawienia</div>
+            <div class="menu-sep"></div>
+            <div onClick ="openURL('<?php echo $this->url(array('language' => 'pl', 'module' => 'auth', 'controller' => 'index', 'action' => 'logout')); ?>');"><strong>Wyloguj</strong></div>
+        <?php else: ?>
+                <div onClick ="javascript:$('#login-box-container').dialog('opnen');"><strong>Zaloguj</strong></div>
+        <?php endif; ?>
+
+    </div>
+
+    <!--
+
+                        <li ><a href="echo $this->url(array('language'=>'pl','module' => 'dynamicsites', 'controller' => 'structure', 'action' => 'categories')); ?>"><div class="memu-icon sprite-folder_page"></div>Lista stron</a></li>
+                        <li ><a href="echo $this->url(array('language'=>'pl','module' => 'dynamicsites', 'controller' => 'structure', 'action' => 'categories')); ?>"><div class="memu-icon sprite-folder_edit"></div>Edytor kategorii</a></li>
+                        <li ><a href="echo $this->url(array('language'=>'pl','module' => 'dynamicsites', 'controller' => 'upload', 'action' => 'show')); ?>"><div class="memu-icon sprite-help"></div>Pomoc</a></li>
+    -->
+
+</div>
+    
+    <div id="topmenu">
+            <div id="topmenu_left">
+             <ul>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+                <li class="mainli">
+                    <a href="strona.php">
+                        <img src="/cms/admin/images/new/ico_04.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+                <li class="mainli">
+                    <a href="strona.php?strona=2">
+                        <img src="/cms/admin/images/new/ico_07.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+                <li class="mainli">
+                    <a href="strona.php?strona=29">
+                        <img src="/cms/admin/images/new/ico_08.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+                <li class="mainli">
+                    <a href="#">
+                        <img src="/cms/admin/images/new/ico_09.png">
+                    </a>
+                    <ul class="submenu" style="display: none;">
+                        <li><a href="/admin/newsletter_napisz.php">napisz nowy email</a></li>
+                        <li><a href="/admin/newsletter_dodaj.php">dodaj użytkownika</a></li>
+                        <li><a href="/admin/newsletter.php">użytkownicy</a></li>
+                        <li><a href="/admin/newsletter_grupa_dodaj.php">dodaj grupę</a></li>
+                        <li><a href="/admin/newsletter_grupa.php">edycja grup</a></li>
+                     </ul>
+                </li>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+              </ul>
+            </div>
+            <div id="topmenu_right">
+             <ul>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+                <li class="mainli">
+                    <a href="/admin/admin.php">
+                        <img src="/cms/admin/images/new/ico_11.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+                <li class="mainli">
+                    <a href="/admin/ustawienia.php">
+                        <img src="/cms/admin/images/new/ico_10.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+                <li class="mainli">
+                    <a href="/">
+                        <img src="/cms/admin/images/new/ico_13.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+                <li class="mainli">
+                    <a href="/admin/loguj.php">
+                        <img src="/cms/admin/images/new/ico_14.png">
+                    </a>
+                </li>
+                <li>
+                    <div class="kreska"></div>
+                </li>
+              </ul>
+            </div>
+        <div>
+	<div id="all">
+
+		<div id="center">
+			<div id="top">
+				<a href="http://milleniumstudio.pl/"></a>
+			</div>
+			<div id="content_div">
+                                <div id="top_content"></div>
+				<div id="content">
+					<div id="strulktura_left">
+	<div class="s_top">
+		struktura stron
+	</div>
+	<div class="s_middle">
+		<ul><li style="padding-left:5px" class="normal clear"><span class="arrows"><img class="arrow_gora_nie" alt="wdgore" src="images/gora_nie.png"><a href="strona.php?move=down&amp;id_strona=1"><img alt="wdol" src="images/dol.png"></a> </span><img alt="" src="images/strona.png"><span class="s_tresc">Witamy</span></li><li style="padding-left:5px" class="normal clear"><span class="arrows"><a href="strona.php?move=up&amp;id_strona=2"><img alt="wdgore" src="images/gora.png"></a> <a href="strona.php?move=down&amp;id_strona=2"><img alt="wdol" src="images/dol.png"></a> </span><img alt="" src="images/katalog.png"><a href="strona.php?strona=2" class="strona"><span class="s_tresc">Aktualności</span></a> (3)</li><li style="padding-left:5px" class="normal clear"><span class="arrows"><a href="strona.php?move=up&amp;id_strona=19"><img alt="wdgore" src="images/gora.png"></a> <a href="strona.php?move=down&amp;id_strona=19"><img alt="wdol" src="images/dol.png"></a> </span><img alt="" src="images/strona.png"><span class="s_tresc">Kontakt</span></li><li style="padding-left:5px" class="normal clear"><span class="arrows"><a href="strona.php?move=up&amp;id_strona=29"><img alt="wdgore" src="images/gora.png"></a> <a href="strona.php?move=down&amp;id_strona=29"><img alt="wdol" src="images/dol.png"></a> </span><img alt="" src="images/katalog.png"><a href="strona.php?strona=29" class="strona"><span class="s_tresc">Produkty</span></a> (9)</li><li style="padding-left:5px" class="normal clear"><span class="arrows"><a href="strona.php?move=up&amp;id_strona=31"><img alt="wdgore" src="images/gora.png"></a> <a href="strona.php?move=down&amp;id_strona=31"><img alt="wdol" src="images/dol.png"></a> </span><img alt="" src="images/strona.png"><span class="s_tresc">O firmie</span></li><li style="padding-left:5px" class="normal clear"><span class="arrows"><a href="strona.php?move=up&amp;id_strona=32"><img alt="wdgore" src="images/gora.png"></a> <a href="strona.php?move=down&amp;id_strona=32"><img alt="wdol" src="images/dol.png"></a> </span><img alt="" src="images/strona.png"><span class="s_tresc">Współpraca</span></li><li style="padding-left:5px" class="normal clear"><span class="arrows"><a href="strona.php?move=up&amp;id_strona=52"><img alt="wdgore" src="images/gora.png"></a> <img alt="wdol" src="images/dol_nie.png"></span><img alt="" src="images/strona.png"><span class="s_tresc">Motto na Głównej</span></li></ul>
+	</div>
+</div>
+
+<div id="strulktura_right">
+	<div class="s_top">opcje edycji</div>
+	<div class="s_middle">
+		<div class="lista clear"><a href="strona_tresc.php?id_strona=1" class="button"><span class="b_tresc"><img alt="" src="images/edit1.png">treść</span><span class="b_end"></span></a><a href="strona_zdjecia.php?id_strona=1" class="button"><span class="b_tresc"><img alt="" src="images/edit2.png">zdjęcia</span><span class="b_end"></span></a><a href="strona_plik.php?id_strona=1" class="button"><span class="b_tresc"><img alt="" src="images/edit3.png">pliki</span><span class="b_end"></span></a><a href="strona_opcje.php?id_strona=1" class="button"><span class="b_tresc"><img alt="" src="images/edit4.png">opcje</span><span class="b_end"></span></a><a onclick="if(confirm('Jesteś pewien?')) location.href='strona_usun.php?id=1'" class="button"><span class="b_tresc"><img alt="" src="images/edit5.png">usuń</span><span class="b_end"></span></a></div><div class="lista clear"><a href="strona_tresc.php?id_strona=2" class="button"><span class="b_tresc"><img alt="" src="images/edit1.png">treść</span><span class="b_end"></span></a><a href="strona_zdjecia.php?id_strona=2" class="button"><span class="b_tresc"><img alt="" src="images/edit2.png">zdjęcia</span><span class="b_end"></span></a><a href="strona_plik.php?id_strona=2" class="button"><span class="b_tresc"><img alt="" src="images/edit3.png">pliki</span><span class="b_end"></span></a><a href="strona_opcje.php?id_strona=2" class="button"><span class="b_tresc"><img alt="" src="images/edit4.png">opcje</span><span class="b_end"></span></a><a onclick="if(confirm('Jesteś pewien?')) location.href='strona_usun.php?id=2'" class="button"><span class="b_tresc"><img alt="" src="images/edit5.png">usuń</span><span class="b_end"></span></a></div><div class="lista clear"><a href="strona_tresc.php?id_strona=19" class="button"><span class="b_tresc"><img alt="" src="images/edit1.png">treść</span><span class="b_end"></span></a><a href="strona_zdjecia.php?id_strona=19" class="button"><span class="b_tresc"><img alt="" src="images/edit2.png">zdjęcia</span><span class="b_end"></span></a><a href="strona_plik.php?id_strona=19" class="button"><span class="b_tresc"><img alt="" src="images/edit3.png">pliki</span><span class="b_end"></span></a><a href="strona_opcje.php?id_strona=19" class="button"><span class="b_tresc"><img alt="" src="images/edit4.png">opcje</span><span class="b_end"></span></a><a onclick="if(confirm('Jesteś pewien?')) location.href='strona_usun.php?id=19'" class="button"><span class="b_tresc"><img alt="" src="images/edit5.png">usuń</span><span class="b_end"></span></a></div><div class="lista clear"><a href="strona_tresc.php?id_strona=29" class="button"><span class="b_tresc"><img alt="" src="images/edit1.png">treść</span><span class="b_end"></span></a><a href="strona_zdjecia.php?id_strona=29" class="button"><span class="b_tresc"><img alt="" src="images/edit2.png">zdjęcia</span><span class="b_end"></span></a><a href="strona_plik.php?id_strona=29" class="button"><span class="b_tresc"><img alt="" src="images/edit3.png">pliki</span><span class="b_end"></span></a><a href="strona_opcje.php?id_strona=29" class="button"><span class="b_tresc"><img alt="" src="images/edit4.png">opcje</span><span class="b_end"></span></a><a onclick="if(confirm('Jesteś pewien?')) location.href='strona_usun.php?id=29'" class="button"><span class="b_tresc"><img alt="" src="images/edit5.png">usuń</span><span class="b_end"></span></a></div><div class="lista clear"><a href="strona_tresc.php?id_strona=31" class="button"><span class="b_tresc"><img alt="" src="images/edit1.png">treść</span><span class="b_end"></span></a><a href="strona_zdjecia.php?id_strona=31" class="button"><span class="b_tresc"><img alt="" src="images/edit2.png">zdjęcia</span><span class="b_end"></span></a><a href="strona_plik.php?id_strona=31" class="button"><span class="b_tresc"><img alt="" src="images/edit3.png">pliki</span><span class="b_end"></span></a><a href="strona_opcje.php?id_strona=31" class="button"><span class="b_tresc"><img alt="" src="images/edit4.png">opcje</span><span class="b_end"></span></a><a onclick="if(confirm('Jesteś pewien?')) location.href='strona_usun.php?id=31'" class="button"><span class="b_tresc"><img alt="" src="images/edit5.png">usuń</span><span class="b_end"></span></a></div><div class="lista clear"><a href="strona_tresc.php?id_strona=32" class="button"><span class="b_tresc"><img alt="" src="images/edit1.png">treść</span><span class="b_end"></span></a><a href="strona_zdjecia.php?id_strona=32" class="button"><span class="b_tresc"><img alt="" src="images/edit2.png">zdjęcia</span><span class="b_end"></span></a><a href="strona_plik.php?id_strona=32" class="button"><span class="b_tresc"><img alt="" src="images/edit3.png">pliki</span><span class="b_end"></span></a><a href="strona_opcje.php?id_strona=32" class="button"><span class="b_tresc"><img alt="" src="images/edit4.png">opcje</span><span class="b_end"></span></a><a onclick="if(confirm('Jesteś pewien?')) location.href='strona_usun.php?id=32'" class="button"><span class="b_tresc"><img alt="" src="images/edit5.png">usuń</span><span class="b_end"></span></a></div><div class="lista clear"><a href="strona_tresc.php?id_strona=52" class="button"><span class="b_tresc"><img alt="" src="images/edit1.png">treść</span><span class="b_end"></span></a><a href="strona_zdjecia.php?id_strona=52" class="button"><span class="b_tresc"><img alt="" src="images/edit2.png">zdjęcia</span><span class="b_end"></span></a><a href="strona_plik.php?id_strona=52" class="button"><span class="b_tresc"><img alt="" src="images/edit3.png">pliki</span><span class="b_end"></span></a><a href="strona_opcje.php?id_strona=52" class="button"><span class="b_tresc"><img alt="" src="images/edit4.png">opcje</span><span class="b_end"></span></a><a onclick="if(confirm('Jesteś pewien?')) location.href='strona_usun.php?id=52'" class="button"><span class="b_tresc"><img alt="" src="images/edit5.png">usuń</span><span class="b_end"></span></a></div>
+	</div>
+
+</div>
+
+<div class="clear"></div>
+<div id="add_site_bottom">
+    <a id="dodaj_strone" href="strona_dodaj.php?rodzic=0"></a>
+</div>					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+
+	</div>
+<div id="footer">
+</div>
+</div>
+
+</div>

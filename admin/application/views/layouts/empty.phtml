@@ -1,0 +1,65 @@
+<?php echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>CMS 4.0</title>
+        <meta name="language" content="pl" />
+        <meta name="description" content="<?php echo $this->placeholder('description') ?>" />
+        <meta name="keywords" content="<?php echo $this->placeholder('keywords') ?>" />
+        <meta name="author" content="MilleniumStudio" />
+        <meta name="robots" content="index,follow" />
+        <meta name="google-site-verification" content="Mb7cwewyHgq89zJmhbLoS41T4VVhbdkxaOwKNBMWTK8" />
+        <link type="text/css" href="/css/themes/flick/jquery-ui-1.8.12.custom.css" rel="stylesheet" />
+        <link href="/css/clearfix.css?<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+        <link href="/css/styles.css?<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+        <script type="text/javascript"src="/js/jquery-1.6.js"></script>
+       <script type="text/javascript"src="/js/jquery-ui-1.8.12.custom.min.js"></script>
+        <script type="text/javascript"src="/js/jquery.tools.min.js"></script>
+        <script type="text/javascript" src="/js/class/form.js?<?php echo time(); ?>"></script>
+        <script type="text/javascript" src="/js/jquery.form.js?<?php echo time(); ?>"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+           // $("#millenium-hiperlink-bottom").tooltip();
+                /*click*/
+                $( "#dialog" ).dialog({
+                        resizable: false,
+			autoOpen: false,
+			show: "fade",
+                        hide:"fade",
+                        position: 'center',
+                        buttons: {
+                                "Zamknij": function() {
+					$( this ).dialog( "close" );
+				}
+                        }
+		});
+                $('img#module-list-about').click(function() {
+                    $( "#dialog" ).dialog( "open" );
+			return false;
+                  });
+
+                  /*
+                  $('#facebook-hiperlink-bottom').click(function() {
+                    $('#millenium-like-box').fadeIn('slow');
+                    });
+                    */
+               });
+               
+        </script>
+    </head>
+    <body>
+        <div class ="dialog-test"></div>
+        <div id ="dialog" title ="Zobacz informacje o MilleniumCMS">o nas</div>
+        <div id ="background-image-replace-x"></div>
+        <!--Modules list-->
+        <?php echo $this->oWidgetModulesList;?>
+        <!--/Modules list-->
+
+            <?php echo $this->layout()->content ?>
+
+        <div title ="Przejdź do naszej strony www" id ="millenium-hiperlink-bottom"></div>
+        <!-- Wyswietlanie widgetu Facebook-->
+        <?php echo $this->oWidgetFacebook;?>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+    <head>
+        <?php echo $this->headTitle(); ?>
+        <meta http-equiv="content-Type" content="text/html; charset=utf-8" />
+        <?php
+        $this->headLink()->appendStylesheet($this->baseUrl() . '/css/clearfix.css?' . time())
+                ->appendStylesheet($this->baseUrl() . '/css/jquery.fancybox-1.3.4.css')
+                ->appendStylesheet($this->baseUrl() . '/css/validation.css')
+                ->appendStylesheet($this->baseUrl() . '/css/style.css?' . time());
+        /**
+         * Dodaje odpowiednie skrypty
+         */
+        $this->headScript()
+                ->appendFile('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
+                ->appendFile($this->baseUrl() . '/js/cufon.js')
+                ->appendFile($this->baseUrl() . '/js/Cuprum_400.font.js')
+                ->appendFile($this->baseUrl() . '/js/sitescript.js')
+                //->appendFile($this->baseUrl() . '/js/jquery.tools.min.js');
+                ->appendFile('http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js')
+                ->appendFile($this->baseUrl() . '/js/jquery.fancybox-1.3.4.js')
+                ->appendFile($this->baseUrl() . '/js/validation-pl.js')
+                ->appendFile($this->baseUrl() . '/js/validation.js')
+                ->appendFile($this->baseUrl() . '/js/ckeditor/ckeditor.js')
+                ->appendFile($this->baseUrl() . '/js/jquery.uploadify.js');
+
+
+
+        /**
+         * Wyswietlam skryoty i nagłówki
+         *
+         */
+        echo $this->headLink();
+        echo $this->headScript();
+        ?>
+
+
+
+
+    </head>
+
+    <body>
+        <div id = "mask"></div>
+        <div id = "body"></div>
+        <div id = "container">
+            <div id="top">
+                <?php echo $this->render('elements/top.phtml'); ?>
+            </div>
+
+            <div id="content">
+
+                <div id="content_left">
+                    <?php echo $this->layout()->leftContent ?>
+                </div>
+
+                <div id="content_right">
+                    <?php 
+                     //right sitebar Top
+                     echo $this->layout()->rightSideBarTop->render();
+                     
+                     //right sitebar Top Articles
+                     echo $this->layout()->rightSiteBarTopArticles->render();
+                    ?>
+                </div>
+            </div>
+            <div id="footer" class="corners">
+                <?php echo $this->render('elements/footer.phtml'); ?>
+            </div>
+        </div>        
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'pl'}
+</script>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+Options +FollowSymLinks
+
+SetEnvIfNoCase Host "admin.gazeta.millenium2.nazwa.pl" APPLICATION_ENV=production
+SetEnvIfNoCase Host "admin.gazeta.localhost" APPLICATION_ENV=development
+SetEnvIfNoCase Host "admin.beta.gazeta.localhost" APPLICATION_ENV=testing
+    #set global application config
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+

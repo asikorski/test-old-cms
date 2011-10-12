@@ -1,0 +1,56 @@
+<?php
+echo $this->doctype();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><?php echo (isset($_SERVER['HTTP_HOST']))?$_SERVER['HTTP_HOST']:'apps.eura7.pl'?> - <?php echo $this->placeholder('title') ?></title>
+    <meta name="language" content="pl" />
+    <meta name="description" content="<?php echo $this->placeholder('description') ?>" />
+    <meta name="keywords" content="<?php echo $this->placeholder('keywords') ?>" />
+    <meta name="author" content="Eura7" />
+    <meta name="robots" content="index,follow" />
+    <meta name="google-site-verification" content="Mb7cwewyHgq89zJmhbLoS41T4VVhbdkxaOwKNBMWTK8" />
+    <?php echo $this->headLink()->appendStylesheet('/css/styles.css');?>
+    <?php echo $this->headLink()->appendStylesheet('/css/jquery-ui-1.8.9.custom.css');?>
+    <?php echo $this->headLink()->appendStylesheet('/css/clearfix.css?'.time());?>
+    <?php echo $this->headScript() ?>
+    <script type="text/javascript"src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript"src="/js/googlemaps.js"></script>
+    <script type="text/javascript"src="/js/jquery.js"></script>
+    <script type="text/javascript"src="/js/jquery-ui-1.8.9.custom.min.js"></script>
+
+</head>
+<body>
+	<!-- /Facebook -->
+	<div id="fb-root"></div>
+	<script type ="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
+		<!-- /Facebook -->
+	<div id = "content">
+		<div id ="head">
+
+			<div id ="logo"></div>
+			<div id ="phone"></div>
+		</div>
+
+            <?php echo $this->render('menu.phtml'); ?>
+            
+	<div id = "container" class ="clearfix">
+        <div class ="left clearfix">
+            <?php echo $this->layout()->content ?>
+        </div>
+        <div id ="right" class = "facebook-like-box">
+        <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FLudzie-gryza%2F160572337326794&amp;width=292&amp;colorscheme=light&amp;show_faces=true&amp;stream=true&amp;header=true&amp;height=427" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:427px; background-color:white;" allowTransparency="false">
+        </iframe>
+        </div>
+<?php
+if ($this->controller == 'reports'){
+    echo $this->render($this->controller.'/all.phtml');
+}
+?>
+	</div>
+		<!--Generuje content-->
+		<div id ="footer"></div>
+	</div>
+</body>
+</html>

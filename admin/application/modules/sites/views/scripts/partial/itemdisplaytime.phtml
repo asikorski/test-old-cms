@@ -1,0 +1,15 @@
+<?php
+/**
+ * Wyswietlanie ładnie wygenerowanej daty
+ */
+$row = $this->row;
+?>
+<?php if ($row['date_add']): ?>
+<?php $passed = $this->TimePassed(strtotime($row['date_mod']));?>
+<?php $passedAdd = $this->TimePassed(strtotime($row['date_add']));?>
+    <span title="Od daty dodania mineło: <?= $passedAdd; ?>, plik został dodany o godzinie: <?= date('h:m:s', strtotime($row['date_add'])); ?>">
+    <?= date('d-m-Y', strtotime($row['date_add'])); ?> <br/><span style ="font-size: 9px;">(edytowany <?= $passed; ?> temu)</span>
+    </span>
+<?php else: ?>
+        --
+<?php endif; ?>

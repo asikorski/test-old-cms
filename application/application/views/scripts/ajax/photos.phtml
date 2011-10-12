@@ -1,0 +1,40 @@
+<?php
+$perpage = 13;
+$iterator = 0;
+$sum = 1;
+if ($this->oPhotos):
+    echo '<ul  class="slider wrapper slider' . $sum . '" style="display: block;" >';
+
+    foreach ($this->oPhotos as $key => $gallery):
+
+        if (($key + 1) % $perpage == null) {
+            $sum++;
+            echo '</ul><ul  class="slider wrapper slider' . $sum . '" style="display: none;" >';
+        }
+        /* generowanie trescie */
+            $filename = $gallery['info']['filename'];
+            $Normal = $gallery['urls']['_140px'];
+		$min = $gallery['urls']['_420px'];
+$big = $gallery['urls']['_1000px'];
+            $Black = $gallery['urls']['_140px_black']
+?>
+            <li>
+                <a title ="<?php echo $key; ?>"  id ="obrazek<?php echo $key ?>" style ="background:url('<?php echo $Black; ?>') no-repeat scroll center -40px;display:block;width:240px;height:140px;" rel="group1" href="<?php echo $big; ?>" class="test1 bwWrapper">
+<img style="display:none;" src="<?php echo $min; ?>" />
+                    <style type="text/css">
+                        a#obrazek<?php echo $key ?>:hover{
+                            background:url('<?php echo $Normal; ?>') no-repeat scroll center -40px !important;
+			    opacity:0.8;filter:alpha(opacity=80)
+                        }
+                    </style>
+                </a>
+		<span style="background:url('<?php echo $Normal; ?>')"></span>
+            </li>
+<?php
+    $sum++;
+    endforeach;
+    echo '</ul>';
+?>
+<?php else: ?>
+        <center><strong>Brak elementów do wyswietlenia</strong></center>
+<?php endif; ?>

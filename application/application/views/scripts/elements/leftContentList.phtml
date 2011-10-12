@@ -1,0 +1,45 @@
+<?php $category = array('News', 'Polityka', 'Biznes', 'Sport', 'Kultura', 'Technika', 'Publicystyka', 'Zdrowie') ?>
+<!--          wylengarnia -->
+<h2 class="corners"><?php echo $this->h2title; ?></h2>
+<?php foreach ($this->data as $item): ?>
+    <div class="news_item">
+        
+        <div class="news_item_main">
+            <div class="news_item_img">
+            <?php
+            if (isset($item['item']['files'][0]['filename'])) {
+                $src = $this->ImgToUrl($item['item']['files'][0]['filename'], 'sites', 'pl', array('image_resize' => true,
+                    'image_x' => 100,
+                    'image_y' => 71,
+                    'image_ratio_crop' => 'top',));
+            } else {
+                $src = '/img/' . $this->category[$item['item']['row']['category_id']]['name_url'] . '.jpg';
+            }
+            ?>
+            <img src="<?php echo $src; ?>" />
+            </div>
+            <div class="news_item_text">
+                <h3><a href="<?php echo $this->baseUrl() . $this->category[$item['item']['row']['category_id']]['name_url'] . '/' . $item['item']['row']['name_url']; ?>"><?php echo $item['item']['row']['short_desc']; ?></a></h3>
+                <p><?php echo $item['item']['row']['lead']; ?></p>
+            </div>
+
+        </div>
+        <div class="news_item_bottom">
+            <span class="vote">
+                <img src="/img/1_37.png" style="position: relative; left: <?php echo rand( 3, 70); ?>px"/>
+            </span>
+            <span class="bar corners">
+                <span class="news_item_date info"><?php echo $item['item']['row']['date_add']; ?></span>
+                <span class="news_item_pkt info">+235pkt</span>
+                <span class="news_item_pos info">135 miejsce</span>
+                <span class="news_item_user info">DonPedro</span>
+                <span class="news_item_more"><a class="corners" href="<?php echo $this->baseUrl() . $this->category[$item['item']['row']['category_id']]['name_url'] . '/' . $item['item']['row']['name_url']; ?>">czytaj dalej >></a></span>
+                <span class="news_item_category"><a class="corners <?php echo strtolower($this->category[$item['item']['row']['category_id']]['name_url']) ?>" href="<?php echo $this->baseUrl() . $this->category[$item['item']['row']['category_id']]['name_url']?>"><?php echo $this->category[$item['item']['row']['category_id']]['name'] ?></a></span>
+            </span>
+        </div>
+
+    </div>
+    <hr />
+<?php endforeach; ?>
+<?php //echo $this->render('elements/pagination.phtml'); ?>
+<p><span id="statusAddArticle" >Ładowanie treści <br/><img alt="" src="/img/ajax-loader.gif" /></span></p>

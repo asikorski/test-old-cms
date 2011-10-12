@@ -1,0 +1,21 @@
+<?php
+echo $this->doctype();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Błąd <?php echo $this->code; ?></title>
+        <meta name="language" content="pl" />
+        <meta name="description" content="<?php echo $this->placeholder('description') ?>" />
+        <meta name="keywords" content="<?php echo $this->placeholder('keywords') ?>" />
+        <meta name="author" content="MilleniumStudio.pl" />
+        <meta name="robots" content="index,follow" />
+        <meta name="google-site-verification" content="xxx" />
+	<link href="/css/errors.css?<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+        <link href="/css/clearfix.css?<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+
+	    <?php echo $this->layout()->content ?>
+    </body>
+</html>

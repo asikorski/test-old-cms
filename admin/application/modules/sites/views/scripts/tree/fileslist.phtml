@@ -1,0 +1,48 @@
+<?php $rows = $this->relationsList; ?>
+<div id="categories-tree-edit-dialog" class="easyui-dialog" style="width:600px;height:450px"
+     closed="false" title ="Lista wszystkich plików"  buttons ="#dlg-buttons-tree-edit" >
+    <div class ="easyui-toolbar">
+        <a href="#" class="easyui-linkbutton button-blue" onClick ="addNewNode();" title ="Dodaj nowy element"  >Dodaj</a>
+        <a href="#" class="easyui-linkbutton button-blue" onClick ="removeNode()" title ="Usuń zaznaczone elementy"  >Usuń</a>
+    </div>
+
+
+    <div >
+       <?php echo $this->URL(array('controller'=>'tree','module'=>'sites','action'=>'test'));?>
+        <?php if (!$rows): ?>
+            brak plików relacji
+        <?php else: ?>
+            <ul class ="files-list">
+        <?php foreach ($rows as $row): ?>
+                <li></li>
+        <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+        <?php
+
+        ?>
+
+    </div>
+
+    <div id="dlg-buttons-tree-edit">
+        <div style ="float:left;">
+            <input id="ss" ></input>
+            <div id="mm" style="width:120px">
+                <div name="all" iconCls="icon-ok">All News</div>
+                <div name="sports">Sports News</div>
+            </div>
+        </div>
+        <a href="#" class="easyui-linkbutton button-blue"  title ="Zapisz zmiany"  ><strong>Zamknij</strong></a>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#ss').searchbox({
+        width:200,
+        searcher:function(value,name){
+            alert(value + "," + name)
+        },
+        menu:'#mm',
+        prompt:'Please Input Value'
+    });
+</script>
+

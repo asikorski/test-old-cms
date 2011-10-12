@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Skrypt do wysyłąnia repo na serwer \n Serwer:git@git.assembla.com:unicorn-cms.git \n"
+#skrypt do wysylania repo na serwer
+git push git@git.assembla.com:unicorn-cms.git
+echo "\n Operacja zakończona "

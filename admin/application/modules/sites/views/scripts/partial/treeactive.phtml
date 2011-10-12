@@ -1,0 +1,18 @@
+<?php
+$row = $this->row;
+?>
+
+<ul class ="easyui-links-list" style="height:18px;margin:0px auto;padding: 0;width: 20px;">
+    
+    <li style= "float:left;margin-right:2px;">
+        <?php if($row['addable']):?>
+        <a title ="Aktywny" href="#" class ="sprite-accept" style ="display:block;"></a>
+        <?php else:?>
+        <a title ="Nieaktywny" href="#" class ="sprite-cross" style ="display:block;"></a>
+        <?php endif;?>
+    </li>
+    
+
+</ul>
+<?php
+?>
