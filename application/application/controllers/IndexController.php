@@ -19,7 +19,7 @@ class IndexController extends myControllerView {
         $this->oDbModel = new CMS_Connection(array('module' => 'sites',
                     'lang' => 'pl',
                     'baseURL' => 'gazeta.localhost'));
-
+         $this->oUserConnector = new CMS_Users(array('lang' => 'pl'));
         $this->layout->leftContent = $this->leftContentView();
     }
 

@@ -14,11 +14,13 @@ class CategoryController extends myControllerView {
     public $oDbModel;
     
     public function init() {
+
         parent::init();
         $this->oDbModel = new CMS_Connection(array('module' => 'sites',
                     'lang' => 'pl',
                     'baseURL' => 'gazeta.localhost'));
         $this->votes = new Library_Votes(array('lang' => 'pl'));
+        $this->oUserConnector = new CMS_Users(array('lang' => 'pl'));
     }
 
     public function indexAction() {
