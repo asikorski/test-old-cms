@@ -22,6 +22,10 @@ class ArticlesController extends myControllerView {
     }
 
     public function indexAction() {
+         if(CMS_Users::checkStatus()!=CMS_Users::USER_ACTIVE){
+            $redirector = new Zend_Controller_Action_Helper_Redirector();
+            $redirector->gotoRouteAndExit(array(null), 'userlogin', true);
+        }
         /** TODO
          * - dodac walidacje czy jest juz taki art o podanym tytule
          * 
