@@ -14,13 +14,13 @@ FILE="backup_$DATETIME-$DATE.7z"
   read -p "Czy chcesz wykonać push (y - yes) : " ISYES
 
 if [ $ISYES = 'y' ] ; then
+
 if [ -e ../../$DIRECTORY/_backup/$FILE ]
 then
   echo 'plik istnieje'
 echo $FILE
 
 else
-
 tar cpvfP ../_backup/$FILE ../../$DIRECTORY/
 echo 'Backup complette'
 fi

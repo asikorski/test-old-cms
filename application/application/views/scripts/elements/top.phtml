@@ -3,7 +3,11 @@
         <li><a href="/">strona główna</a></li>
         <li><a href="/wylegarnia">wylęgarnia</a></li>
         <li><a href="#k">kontakt</a></li>
-        <li class="login"><a href="#l">logowanie</a></li>
+        <?php if(CMS_Users::checkStatus()!=CMS_Users::USER_ACTIVE):?>
+        <li class="login"><a href="<?= $this->url(array(null),'userlogin')?>">logowanie</a></li>
+        <?php else: ?>
+        <li class="login"><a href="<?= $this->url(array(null),'usermyaccount')?>">moje konto</a></li>
+        <?php endif; ?>
     </ul>
 </div>
 <div id="promo">

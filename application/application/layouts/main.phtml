@@ -50,10 +50,20 @@
             <div id="content">
 
                 <div id="content_left">
-                    <?php echo $this->layout()->leftContent ?>
+
+                    <?php echo $this->layout()->leftContent
+                            ?>
+                    dfd
+                    <?php
+                    if($this->layout()->isContent){
+                        echo $this->layout()->content; 
+                    }
+                    ?>
+
                 </div>
 
                 <div id="content_right">
+
                     <?php 
                      //right sitebar Top
                      echo $this->layout()->rightSideBarTop->render();
